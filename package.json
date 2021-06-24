@@ -1,0 +1,38 @@
+{
+  "name": "@bukunmikuti/view-router",
+  "version": "1.0.0",
+  "description": "A micro, super simple in-page router",
+  "type": "module",
+  "main": "./dist/viewrouter.min.js",
+  "module": "./dist/viewrouter.esm.min.js",
+  
+  "exports": {
+    "import": "./dist/viewrouter.esm.min.js"
+  },
+  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "bili"
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  
+  "keywords": [
+    "router",
+    "view router",
+    "javascript",
+    "simple",
+    "browser",
+    "esm"
+  ],
+  
+  "devDependencies": {
+  	"bili": "5.0.5"
+  },
+  
+  "author": "Bukunmikuti",
+  "license": "ISC"
+}
