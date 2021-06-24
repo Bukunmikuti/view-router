@@ -1,6 +1,6 @@
 # View Router
 
-<p align="center">A minimal, super simple on-page router ⚡ </p>
+<p align="center">A minimal, super simple in-page router ⚡ </p>
 
 <p align="center">
 <a href="#">
@@ -15,17 +15,17 @@
  </p>
  
  -------------------------
- ## Features
- View Router is a simple solution to navigation between views. <br>
+ ## Features 🎉
+ View Router is a simple library that helps you navigate between different views with style<br>
  
- 🌠 Super fast and minimal <br>
- 🌠 Includes view transitions <br>
- 🌠 Easy to set up <br>
- 🌠 Hash or history API navigation (optional) <br>
- 🌠 Small sized (<10kb) <br>
+ - Super fast and minimal <br>
+ - Includes view transitions <br>
+ - Easy to set up <br>
+ - History API or hash navigation — Optional<br>
+ - Small sized (<10kb) <br>
  
  
- ## Demo
+ ## Demo 🛩️
  You might want to see how it works in a test environment before installing: <br>
  Demo coming soon
  
@@ -34,7 +34,7 @@
  ```
  npm i @bukunmikuti/view-router
  ```
- ### Script tag (browser)
+ ### </ script> tag (Browser)
  ```html
  <script src="cdn"></script>
  ```
@@ -43,14 +43,14 @@
  import ViewRouter from "cdn"
  ```
  
- ## Set up
- View router exposes a single object: ```ViewRouter```, where you can pass your options and control the router.
+ ## Set up ⛱️
+ View router exposes a single object: ```ViewRouter```, where you can pass your options.
  
  ```javascript
  const ViewRouter = new ViewRouter(options)
  ```
 
- This class object should be initialized by passing an [Object object] which must include ```views: []``` and other optional properties.
+ This class should be instantiated by passing a [object Object] which must include ```views: []``` and other optional properties.
  
  ```javascript
  const ViewRouter = new ViewRouter({
@@ -60,16 +60,16 @@
 })
  ```
  ### Options: ```views: []```
- Type: Array of objects [{...}]<br>
- description: This property stores each view's property in an object. It can contain several views.
+ ```Type:``` Array of objects [{...}] — required <br>
+ ```description:``` This property stores each view's property in an object. It can contain several view definitions.
  
-  ```javascript
+ ```javascript
  const ViewRouter = new ViewRouter({
 	views: [
 		{
-			id: "login", //string (required)
-			path: "/login", //string
-			origin: "/login.html", //string
+			id: "login", //required
+			path: "/login",
+			origin: "/login.html",
 			mounted() {}, //callback
 			render() {} //callback
 		},
@@ -79,3 +79,12 @@
 	]
 })
  ```
+ Each view definition should include the following properties:
+ 
+ | View property | Description | Default Value |
+| :---------------: | :---------------: | :---------------: |
+| ```id``` | The 'id' attribute of the view template tag — Required| undefined |
+| ```path``` | The URL path that triggers the view when navigated to | undefined |
+| ```origin``` | If the view is located in another html document, this will contain the relative path to the document. | undefined |
+| ```mounted``` | Views are not part of the DOM by default, they only get mounted when routed to for the first time. Put any logic that depends on accessing elements in the view in this callback. It is called only once | callback undefined |
+| ```render``` | This callback is called each time a view is routed to on the page | callback undefined |
