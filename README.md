@@ -44,16 +44,16 @@
  ```
  
  ## Set up ⛱️
- View router exposes a single object: ```ViewRouter```, where you can pass your options.
+ View router exposes a single object: ```ViewRouter``` where you can pass your options.
  
  ```javascript
- const ViewRouter = new ViewRouter(options)
+ const viewrouter = new ViewRouter(options)
  ```
 
- This class should be instantiated by passing a [object Object] which must include ```views: []``` and other optional properties.
+ This class should be instantiated by passing an object which must include ```views: []``` and other optional properties.
  
  ```javascript
- const ViewRouter = new ViewRouter({
+ const viewrouter = new ViewRouter({
 	views: [], //required
 	navigation: "history"||"hash",
 	transitions: true||false, 
@@ -61,10 +61,10 @@
  ```
  ### Options: ```views: []```
  ```Type:``` Array of objects [{...}] — required <br>
- ```description:``` This property stores each view's property in an object. It can contain several view definitions.
+ ```Description:``` This property stores each view's property in an object. It can contain several view definitions.
  
  ```javascript
- const ViewRouter = new ViewRouter({
+ const viewrouter = new ViewRouter({
 	views: [
 		{
 			id: "login", //required
@@ -84,7 +84,30 @@
  | View property | Description | Default Value |
 | :---------------: | :---------------: | :---------------: |
 | ```id``` | The 'id' attribute of the view template tag — Required| undefined |
-| ```path``` | The URL path that triggers the view when navigated to | undefined |
+| ```path``` | The URL path that triggers the view when navigated to. | undefined |
 | ```origin``` | If the view is located in another html document, this will contain the relative path to the document. | undefined |
-| ```mounted``` | Views are not part of the DOM by default, they only get mounted when routed to for the first time. Put any logic that depends on accessing elements in the view in this callback. It is called only once | callback undefined |
-| ```render``` | This callback is called each time a view is routed to on the page | callback undefined |
+| ```mounted``` | Views are not part of the DOM by default, they only get mounted when routed to for the first time. Put any logic that depends on accessing elements in the view here. It is called only once | callback undefined |
+| ```render``` | This method is called each time a view is routed to | callback undefined |
+
+ ### Options: ```navigation: "history||hash"```
+ ```Type:``` String — optional<br>
+ ```Description:``` Choose navigation type using URL hash or Web history API. If undefined or false then routing is automatically disabled, else ```views: [{path: ""}]``` must be specified.
+ 
+  ### Options: ```transitions: "true||false"```
+ ```Type:``` String — optional<br>
+ ```Description:``` Allow or disable view transitions. Transition type must be specified on the view ```<template>``` tag. <br>All transitions — ```fadeIn``` ```fadeInTop``` ```fadeInBottom``` ```fadeInLeft``` ```fadeInRight```
+ ```html
+ <!--index.html-->
+ <template id="login" class="v-router fadeInLeft"></template>
+ 
+ <script>
+ 	let v = new ViewRouter({
+ 		//...
+ 		transitions: true
+ 	})
+ </script>
+ 
+ ```
+ 
+ 
+ 
