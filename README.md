@@ -14,6 +14,10 @@
  </a>
  </p>
  
+ > **Disclaimer:** View Router is not in any way related to [vue-router](https://github.com/vuejs/vue-router) the official router of vue.js, neither are they alternatives. 
+ > 
+ > View Router is instead a simple standalone in-page navigator.
+ 
  -------------------------
  ## Features 🎉
  View Router is a simple library that helps you navigate between different views with style<br>
@@ -24,6 +28,7 @@
  - History API or hash navigation — Optional<br>
  - Small sized (<10kb) <br>
  
+
  
  ## Demo
  You might want to see how it works in a test environment before installing: <br>
@@ -34,7 +39,7 @@
  ```
  npm i @bukunmikuti/view-router
  ```
- ### </ script> tag (Browser)
+ ### \<script> Include 
  ```html
  <script src="cdn"></script>
  ```
@@ -79,14 +84,14 @@
 	]
 })
  ```
- Each view definition should include the following properties:
+ A view definition should include the following properties:
  
  | View property | Description | Default Value |
 | :---------------: | :---------------: | :---------------: |
-| ```id``` | The 'id' attribute of the view template tag — Required| undefined |
+| ```id``` | The 'id' attribute of the template tag — Required| undefined |
 | ```path``` | The URL path that triggers the view when navigated to. | undefined |
 | ```origin``` | If the view is located in another html document, this will contain the relative path to the document. | undefined |
-| ```mounted``` | Views are not part of the DOM by default, they only get mounted when routed to for the first time. Put any logic that depends on accessing elements in the view here. It is called only once | callback undefined |
+| ```mounted``` | Views are not part of the DOM by default, they only get mounted when routed to for the first time. Put any logic that depends on accessing elements of the view here. It is called only once | callback undefined |
 | ```render``` | This method is called each time a view is routed to | callback undefined |
 
  ### Property: ```navigation```
@@ -95,7 +100,7 @@
  
   ### Property: ```transitions```
  ```Type:``` Boolean — optional<br>
- ```Description:``` Allow or disable view transitions. Transition type must be specified on the view ```<template>``` tag. <br>All transitions — ```fadeIn``` ```fadeInTop``` ```fadeInBottom``` ```fadeInLeft``` ```fadeInRight```
+ ```Description:``` Enable or disable view transitions. Transition type must be specified on the view ```<template>``` tag. <br>All transitions — ```fadeIn``` ```fadeInTop``` ```fadeInBottom``` ```fadeInLeft``` ```fadeInRight```
  
  ```html
  <!--index.html-->
