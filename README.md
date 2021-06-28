@@ -41,7 +41,7 @@ View Router ships a browser build for
 ```<script>``` tags 
 and an ES Module format. You can also install via npm.
 <details>
-<summary>Check all options</summary>
+<summary>Check all options ➡️</summary>
 
  ### NPM
  ```
@@ -74,12 +74,11 @@ and an ES Module format. You can also install via npm.
 })
  ```
 
- <details>
- <summary>
-
+ 
 ## ```views: []```
-
-</summary>
+<details>
+<summary>see details ➡️</summary>
+<br>
 
  ```Type:``` Array of objects — required <br>
  ```Description:``` This property stores each view's property in an object. It can contain several view definitions.
@@ -111,24 +110,24 @@ and an ES Module format. You can also install via npm.
 | ```render``` | This method is called each time a view is routed to | callback undefined |
 </details>
 
-<details>
-<summary>
 
 ## ```navigation```
-
+<details>
+<summary>
+see details ➡️
 </summary>
+<br>
 
  ```Type:``` String — history or hash (optional) <br>
  ```Description:``` Use hash navigation or Web history API. If undefined or false then routing is automatically disabled, else ```views: [{path: ""}]``` must be specified.
  </details>
 
-<details>
-<summary>
 
 ## ```transition```
+<details>
+<summary>see details ➡️</summary>
+<br>
 
-</summary>
-  
  ```Type:``` Boolean — optional<br>
  ```Description:``` Enable or disable view transitions. Transition type must be specified on the view ```<template>``` tag. <br>All transitions — ```fadeIn``` ```fadeInTop``` ```fadeInBottom``` ```fadeInLeft``` ```fadeInRight```
  
@@ -148,12 +147,11 @@ and an ES Module format. You can also install via npm.
  ```
 </details>
 
-<details>
-<summary>
 
 ## Methods
-
-</summary>
+<details>
+<summary>see details ➡️</summary>
+<br>
 
 | Method | Description | Return Value |
 | :---------------: | :---------------: | :---------------: |
