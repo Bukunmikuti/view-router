@@ -57,7 +57,7 @@ and an ES Module format. You can also install via npm.
  ```
 </details>
  
- # Set up 🛰️
+ # Set up 🚀
  View router exposes a single object: ```ViewRouter``` where you can pass your options.
  
  ```javascript
@@ -161,7 +161,7 @@ see details ➡️
  # Contribution
  You can contribute by making pull requests to fix issues, 
 dropping a code review/demo example or updating the readme.<br>
-Your objectives should be clearly stated<br>
+Your changes should be clearly stated.<br>
 Thank you! 
 
  # Liscense
