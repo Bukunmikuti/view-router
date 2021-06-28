@@ -37,18 +37,25 @@
  Demo coming soon
  
  # Installation
- ## NPM
+View Router ships a browser build for 
+```<script>``` tags 
+and an ES Module format. You can also install via npm.
+<details>
+<summary>Check all options</summary>
+
+ ### NPM
  ```
  npm i @bukunmikuti/view-router
  ```
- ## Script include 
+ ### Script include
  ```html
  <script src="cdn"></script>
  ```
- ## ES Module
+ ### ES Module
  ```javascript
  import ViewRouter from "cdn"
  ```
+</details>
  
  # Set up 🛰️
  View router exposes a single object: ```ViewRouter``` where you can pass your options.
@@ -57,7 +64,7 @@
  const viewrouter = new ViewRouter(options)
  ```
 
- This class should be instantiated by passing an object which must include ```views: []``` and other optional properties.
+ Instantiate the class by passing an object parameter which must include ```views: []``` and other optional properties.
  
  ```javascript
  const viewrouter = new ViewRouter({
@@ -66,8 +73,15 @@
 	transition: true||false, 
 })
  ```
- ## Property: ```views: []```
- ```Type:``` Array of objects [{...}] — required <br>
+
+ <details>
+ <summary>
+
+## ```views: []```
+
+</summary>
+
+ ```Type:``` Array of objects — required <br>
  ```Description:``` This property stores each view's property in an object. It can contain several view definitions.
  
  ```javascript
@@ -95,12 +109,26 @@
 | ```origin``` | If the view is located in another html document, this will contain the relative path to the document. | undefined |
 | ```mounted``` | Views are not part of the DOM by default, they only get mounted when routed to for the first time. Put any logic that depends on accessing elements of the view here. It is called only once | callback undefined |
 | ```render``` | This method is called each time a view is routed to | callback undefined |
+</details>
 
- ## Property: ```navigation```
+<details>
+<summary>
+
+## ```navigation```
+
+</summary>
+
  ```Type:``` String — history or hash (optional) <br>
- ```Description:``` Make router use hash navigation or Web history API. If undefined or false then routing is automatically disabled, else ```views: [{path: ""}]``` must be specified.
- 
-  ## Property: ```transition```
+ ```Description:``` Use hash navigation or Web history API. If undefined or false then routing is automatically disabled, else ```views: [{path: ""}]``` must be specified.
+ </details>
+
+<details>
+<summary>
+
+## ```transition```
+
+</summary>
+  
  ```Type:``` Boolean — optional<br>
  ```Description:``` Enable or disable view transitions. Transition type must be specified on the view ```<template>``` tag. <br>All transitions — ```fadeIn``` ```fadeInTop``` ```fadeInBottom``` ```fadeInLeft``` ```fadeInRight```
  
@@ -118,12 +146,25 @@
  </script>
  
  ```
- ## Methods
+</details>
+
+<details>
+<summary>
+
+## Methods
+
+</summary>
+
 | Method | Description | Return Value |
 | :---------------: | :---------------: | :---------------: |
 | ```routeTo()``` | Navigate to the specified view. Accepts view id as parameter | executes render() |
- 
+ </details>
+
  # Contribution
- 
+ You can contribute by making pull requests to fix issues, 
+dropping a code review/demo example or updating the readme.<br>
+Your objectives should be clearly stated<br>
+Thank you! 
+
  # Liscense
- 
+ This project is available under the [ISC Liscense]()
