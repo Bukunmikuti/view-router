@@ -14,9 +14,9 @@
  </a>
  </p>
  
- > **Disclaimer:** View Router is not in any way related to [vue-router](https://github.com/vuejs/vue-router) the official router of vue.js, neither are they alternatives. 
+ > View Router is not in any way related to [vue-router](https://github.com/vuejs/vue-router) the official router of vue.js, neither are they alternatives. 
  > 
- > View Router is instead a simple standalone in-page navigator.
+ > View Router is a simple standalone in-page navigator.
  
  -------------------------
  ## Features 🎉
@@ -28,7 +28,6 @@
  - History API or hash navigation — Optional<br>
  - Small sized (<10kb) <br>
  
-
  
  ## Demo
  You might want to see how it works in a test environment before installing: <br>
@@ -61,7 +60,7 @@
  const viewrouter = new ViewRouter({
 	views: [], //required
 	navigation: "history"||"hash",
-	transitions: true||false, 
+	transition: true||false, 
 })
  ```
  ### Property: ```views: []```
@@ -98,7 +97,7 @@
  ```Type:``` String — history or hash (optional) <br>
  ```Description:``` Make router use hash navigation or Web history API. If undefined or false then routing is automatically disabled, else ```views: [{path: ""}]``` must be specified.
  
-  ### Property: ```transitions```
+  ### Property: ```transition```
  ```Type:``` Boolean — optional<br>
  ```Description:``` Enable or disable view transitions. Transition type must be specified on the view ```<template>``` tag. <br>All transitions — ```fadeIn``` ```fadeInTop``` ```fadeInBottom``` ```fadeInLeft``` ```fadeInRight```
  
@@ -111,7 +110,7 @@
  
  let v = new ViewRouter({
   //...
-  transitions: true
+  transition: true
  })
  </script>
  

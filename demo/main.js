@@ -39,7 +39,7 @@ let v = new ViewRouter({
 	],
 	
 	navigation: 'history',
-	transitions: true, 
+	transition: true, 
 })
 
 

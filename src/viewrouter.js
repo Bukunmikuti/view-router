@@ -7,7 +7,7 @@ export default class ViewRouter {
 		//options is an object {...}
 		this.options = options;
 		this.views = this.options.views;
-		this.enableTransitions();
+		this.enableTransition();
 		this.manageNavigation(this.options.navigation);
 		
 		//other inits
@@ -141,8 +141,8 @@ async manageView(view) {
 	}
 	
 	
-	enableTransitions() {
-		if (this.options.transitions) {
+	enableTransition() {
+		if (this.options.transition) {
 			embedTransition();
 		}
 	}
