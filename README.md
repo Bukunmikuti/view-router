@@ -41,7 +41,7 @@
  ```
  npm i @bukunmikuti/view-router
  ```
- ## \<script> Include 
+ ## Script include 
  ```html
  <script src="cdn"></script>
  ```
