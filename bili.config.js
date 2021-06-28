@@ -4,8 +4,11 @@ module.exports = {
 	output: {
 		dir: 'dist',
 		//extractCSS: true,
-		fileName: 'viewrouter.js',
-		format: [/*'esm-min',*/ 'umd-min'],
+		fileName: 'viewrouter.esm.min.js',
+		format: [
+			'esm-min', 
+		//'umd-min'
+		],
 		minify: true,
 		moduleName: 'ViewRouter', 
 		target: 'browser', 
