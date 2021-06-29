@@ -170,5 +170,5 @@ dropping a code review/demo example or updating the readme.<br>
 Your changes should be clearly stated.<br>
 Thank you! 
 
- # Liscense
- This project is available under the [ISC Liscense](./LISCENSE)
+ # License
+ This project is available under the [ISC Liscense](./LICENSE)
