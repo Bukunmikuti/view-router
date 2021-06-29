@@ -157,6 +157,12 @@ see details ➡️
 | :---------------: | :---------------: | :---------------: |
 | ```routeTo()``` | Navigate to the specified view. Accepts view id as parameter | executes render() |
  </details>
+ 
+ # Browser support
+ View Router currently works well on modern browsers that supports async/await, fetch API and other es6 features.
+ We plan on supporting old browsers in the future release.<br>
+ Check all supported browsers [here](https://caniuse.com/?search=es6)
+ 
 
  # Contribution
  You can contribute by making pull requests to fix issues, 
@@ -165,4 +171,4 @@ Your changes should be clearly stated.<br>
 Thank you! 
 
  # Liscense
- This project is available under the [ISC Liscense]()
+ This project is available under the [ISC Liscense](./LISCENSE)
