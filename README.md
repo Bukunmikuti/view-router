@@ -33,8 +33,8 @@
  
  
  # Demo
- You might want to see how it works in a test environment before installing: <br>
- Demo coming soon
+ You might want to see how it works in a test environment before installing: <br><br>
+Check for all demos [here](https://gist.github.com/Bukunmikuti/cbf1e75ec19dacd29f06420e695e31ad)
  
  # Installation
 View Router ships a browser build for 
@@ -53,7 +53,7 @@ and an ES Module format. You can also install via npm.
  ```
  ### ES Module
  ```javascript
- import ViewRouter from "https://cdn.skypack.dev/@bukunmikuti/hello"
+ import ViewRouter from "https://cdn.skypack.dev/@bukunmikuti/view-router"
  ```
 </details>
  

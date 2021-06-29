@@ -1,5 +1,5 @@
-//import ViewRouter from '../src/viewrouter.js';
-import ViewRouter from '../dist/viewrouter.esm.min.js'
+import ViewRouter from 'https://cdn.skypack.dev/@bukunmikuti/view-router';
+//import ViewRouter from '../dist/viewrouter.esm.min.js'
 
 const login_btn = document.getElementById('login-btn');
 const signup_btn = document.getElementById('signup-btn');
