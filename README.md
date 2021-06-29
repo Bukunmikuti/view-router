@@ -4,13 +4,13 @@
 
 <p align="center">
 <a href="#">
-  <img src="https://img.shields.io/bundlephobia/min/@bukunmikuti/hello?color=Blue&style=flat-square">
+ <img alt="npm bundle size (scoped)" src="https://img.shields.io/bundlephobia/min/@bukunmikuti/view-router?style=flat-square">
 </a>
- <a href="">
- <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/Bukunmikuti/Hello?style=flat-square">
+ <a href="https://www.npmjs.com/package/@bukunmikuti/view-router">
+ <img alt="npm (scoped)" src="https://img.shields.io/npm/v/@bukunmikuti/view-router?style=flat-square">
  </a>
- <a href="https://www.npmjs.com/package/@bukunmikuti/hello">
-  <img alt="npm" src="https://img.shields.io/npm/v/@bukunmikuti/hello?style=flat-square">
+ <a href="">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Bukunmikuti/view-router?logoColor=%23880000&style=flat-square">
  </a>
  </p>
  
@@ -23,7 +23,7 @@
  -------------------------
  
  # Features 🎉
- View Router is a simple library that helps you navigate between different views with style<br>
+ View Router is a simple library that helps you navigate between different views with style.<br>
  
  - Super fast and minimal <br>
  - Includes view transitions <br>
