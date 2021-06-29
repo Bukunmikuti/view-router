@@ -1,14 +1,11 @@
 {
   "name": "@bukunmikuti/view-router",
   "version": "1.0.0",
-  "description": "A micro, super simple in-page router",
+  "description": "A super simple in-page router/navigator",
   "type": "module",
-  "main": "./dist/viewrouter.min.js",
+  "main": "./dist/viewrouter.umd.min.js",
+  "browser": "./dist/viewrouter.umd.min.js", 
   "module": "./dist/viewrouter.esm.min.js",
-  
-  "exports": {
-    "import": "./dist/viewrouter.esm.min.js"
-  },
   
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,16 +14,19 @@
   
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Bukunmikuti/view-router.git"
   },
   
+  "bugs": "https://github.com/Bukunmikuti/view-router/issues", 
+  
   "keywords": [
-    "router",
-    "view router",
-    "javascript",
-    "simple",
-    "browser",
-    "esm"
+  	"view router",
+  	"view transitions",
+   "navigator",
+   "javascript",
+   "simple",
+   "browser",
+   "esm"
   ],
   
   "devDependencies": {

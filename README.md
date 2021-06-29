@@ -159,8 +159,8 @@ see details ➡️
  </details>
  
  # Browser support
- View Router currently works well on modern browsers that supports async/await, fetch API and other es6 features.
- We plan on supporting old browsers in the future release.<br>
+ View Router currently works on all modern browsers that support async/await, fetch API and other es6 features.
+ We plan on supporting older browsers in future release.<br><br>
  Check all supported browsers [here](https://caniuse.com/?search=es6)
  
 
