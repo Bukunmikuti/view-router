@@ -49,11 +49,11 @@ and an ES Module format. You can also install via npm.
  ```
  ### Script include
  ```html
- <script src="cdn"></script>
+ <script src="https://unpkg.com/@bukunmikuti/view-router"></script>
  ```
  ### ES Module
  ```javascript
- import ViewRouter from "cdn"
+ import ViewRouter from "https://cdn.skypack.dev/@bukunmikuti/hello"
  ```
 </details>
  
