@@ -53,7 +53,7 @@ and an ES Module format. You can also install via npm.
  ```
  ### ES Module
  ```javascript
- import ViewRouter from "https://cdn.skypack.dev/@bukunmikuti/view-router"
+ import ViewRouter from "https://cdn.jsdelivr.net/npm/@bukunmikuti/view-router/+esm"
  ```
 </details>
  
