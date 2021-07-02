@@ -7,8 +7,21 @@
 	<link rel="stylesheet" href="main.css"></link>
 </head>
 <body>
+<template id="welcome" class="v-router fadein">
+	<h1>View Router <span>Demo</span></h1>
+	<p>A simple view-router.js demo with three views. This demo uses URL parameters: 
+	<code>?welcome</code> 
+	<code>?signup</code> 
+	<code>?login</code>
+	for navigation.
+	</p>
 	
-<h1>View Router</h1>
+	<div id="welcome-footer">
+		<button id="signup-btn">Sign up</button>
+		<button id="login-btn">Login</button>
+		<a id="github-link" href="">See on Github</github>
+	</div>
+</template>
 
 <template id="signup" class="v-router fadein">
 	<div>
@@ -33,10 +46,6 @@
 
 
 
-<button id="signup-btn">Sign up</button>
-<button id="login-btn">Log in </button>
-<button id="about-btn">About</button>
-<button id="x">xx</button>
 
 
 
