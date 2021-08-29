@@ -22,9 +22,10 @@
  
  -------------------------
  
- # ROADMAP ✨ 
+ # Roadmap 🚀 
  Roadmap for v1.1.1 release
- - [] make current view 'disappear' or go off screen if back button is pressed and there is no view to nativage to. <br>
+ 
+ - [ ] Make current view 'disappear' or go off screen if back button is pressed and there is no view to nativage to. <br>
  Current behaviour: The browser does nothing when back button is clicked and exits page on second click <br>
  Expected behaviour: removes current view from screen <br>
  Caveat: when a template is the base view, clicking back to remove it from screen might not be user friendly
