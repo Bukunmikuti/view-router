@@ -1,6 +1,5 @@
 import embedTransition from './transitions.js';
 import fetchView from './fetch_view.js'
-//console.log('View Router!');
 
 export default class ViewRouter {
 	constructor (options) {
