@@ -1,10 +1,8 @@
 import embedTransition from './transitions.js';
 import fetchView from './fetch_view.js'
-//console.log('View Router!');
 
 export default class ViewRouter {
 	constructor (options) {
-		//options is an object {...}
 		this.options = options;
 		this.views = this.options.views;
 		this.enableTransition();
@@ -15,20 +13,50 @@ export default class ViewRouter {
 		this.previousView; //previous view ID
 		this.currentView; //current view ID
 		this.currentPath;
+		this.saveNotFound;
 	}
 	
 	
+	/**
+	 * Navigates to current url path on ViewRouter initialization
+	 * @param {function} id
+	 * @returns view ID
+	 */
+	 start(callback) {
+	 	let path = window.location.hash.split('#')[1];
+	 	let view = this.convertToView(path);
+	 	
+	 	if (view != undefined) {
+	 		this.show(view)
+	 		callback(view.id)
+	 	} else {
+	 		callback(undefined);
+	 	}
+	 }
+	
+	
+	/**
+	 * Handle callback for unspecified path
+	 * If callback returns false, view dissapears from screen else if callback returns true, view remains in screen. Default behaviour is false
+	 * @param {function}
+	 * @returns callback
+	 */
+	 notFound(callback) {
+	 	let path = window.location.hash.split('#')[1];
+	 	this.saveNotFound = callback
+	 }
+	
+	
+	/**
+	 * Navigates to the specified view Id
+	 * @param {string} id
+	 * @returns 'render()' function and 'mounted()' for first navigation
+	 */
 	routeTo(id) {
-		let view;
-		this.views.some((route) => {
-			if (route.id == id) {
-				view = route;
-				return true;
-			}
-		})
+		let view = this.convertToView(id);
 		
 		if (view == undefined) {
-			throw new Error(`ViewRouter: Cannot find view ID of ${id}`);
+			this.view404(`Cannot find view ID of ${id}`)
 		}
 		
 		switch (this.options.navigation) {
@@ -40,7 +68,7 @@ export default class ViewRouter {
 			case 'history':
 				if (view.id != this.currentView) {
 					this.show(view);
-					window.history.pushState({view:view.path} ,'', view.path)
+					window.history.pushState({path:view.path, id:view.id} ,'', view.path)
 				}
 				break;
 			default:
@@ -49,6 +77,7 @@ export default class ViewRouter {
 				}
 		}
 	}
+	
 	
 	/**
 	 * Redirect to a view through the view ID
@@ -59,13 +88,30 @@ export default class ViewRouter {
 		this.manageLifecycle(view);
 	}
 	
+	
+	/**
+	 * Returns view object from id or path
+	 * Function returns undefined if id or path does not exist
+	 */
+	convertToView(str) {
+		let result;
+		this.views.some((view) => {
+			if (view.id == str || view.path == str) {
+				result = view;
+				return true;
+			}
+		})
+		
+		return result;
+	}
+	
+	
 	/**
 	 * check navigation preference and set up behaviour
 	 * add event listener based on navigation type
 	 */
 	manageNavigation(nav) {
 		if (nav == 'hash') {
-			window.location.hash = '';
 			window.addEventListener('hashchange', this._hashChange.bind(this))
 		}
 		
@@ -73,6 +119,7 @@ export default class ViewRouter {
 			window.addEventListener('popstate', this._popstate.bind(this))
 		}
 	}
+	
 	
 	/**
 	 * checks if view has been mounted and toggle _hidden_ attribute
@@ -88,7 +135,7 @@ async manageView(view) {
 		let temp = document.getElementById(view.id);
 		
 		if (temp == null) {
-			this._error(`No such template as: ${view.id}`)
+			throw new Error(`No such template as: ${view.id}`)
 		}
 		
 		if (this.currentView != null && this.currentView != view.id) {
@@ -109,16 +156,16 @@ async manageView(view) {
 	
 	/**
 	 * Returns ViewRouter Lifestyle methods
-	 * methods: mounted and render
+	 * View methods: mounted() and render()
+	 * returns mounted() only once at first navigation 
+	 * returns render() whenever view comes on screen
 	 */
 	manageLifecycle(view) {
-		//mounted callback
 		if (view.mounted != undefined) {
 			view.mounted();
 			view.mounted = undefined;
 		}
 		
-		//render callback
 		if (view.render != undefined) {
 				view.render();
 		}
@@ -141,6 +188,20 @@ async manageView(view) {
 	}
 	
 	
+	/**
+	 * Hide visible view from screen
+	 */
+	 hideView(view) {
+	 	if (this.currentView == view) {
+	 		console.log(view)
+	 		document.getElementById(view).hidden = true;
+	 	}
+	 }
+	
+	
+	/**
+	 * Call embedTransition() if transition is enabled
+	 **/
 	enableTransition() {
 		if (this.options.transition) {
 			embedTransition();
@@ -148,37 +209,66 @@ async manageView(view) {
 	}
 	
 	
+	/**
+	 * Navi to url hash path on hash change event
+	 * Handles unspecified url path by call this.notFound bound function
+	 * @var re: represents the return value of notFound() callback
+	 * Hide view if re is true or undefined
+	 * Navigates to view id if re value is a string
+	 */
 	_hashChange() {
-		let currentPath = window.location.hash.split('#')[1];
+		let path = window.location.hash.split('#')[1];
+		let view = this.convertToView(path)
 		
-		this.views.some((view) => {
-			if (view.path == currentPath) {
-				//path exists in ViewRouter config
-				this.show(view)
-				return true;
+		if (view == undefined) {
+			let re = this.saveNotFound(this.currentPath, path)
+			if (re == true || re == undefined) {
+				this.hideView(this.currentView);
+				this.currentPath = null
+			} else if (typeof(re) == 'string') {
+				this.show(this.convertToView(re));
 			}
-		})
+		} else {
+			this.show(view)
+		}
 	}
 	
 	
+	/**
+	 * Note that the popstate event is not triggered by pushstate()
+	 * _popstate is triggered by browser navigation - back/forward button
+	 * e.state is null when browser navigation calls undefined path
+	 * e.state is not null when browser navigation calls existing path
+	 * If e.state is null, the return value (re) of notFound() callback is considered
+	 * Hide view if re is true or undefined;navigates to view id if re value is a string
+	 */
 	_popstate(e) {
 		if (e.state == null) {
-			console.log('null')
-			window.history.go(-1);
+			let re = this.saveNotFound(this.currentPath, window.location.pathname)
+			if (re == true || re == undefined) {
+				this.hideView(this.currentView);
+				this.currentPath = null
+			} else if (typeof(re) == 'string') {
+				this.show(this.convertToView(re));
+			}
 			return false;
 		}
 		
-		let currentPath = e.state.view
-		
-		this.views.some((view) => {
-			if (view.path == currentPath) {
-				this.show(view)
-				return true;
-			}
-		})
+		let currentPath = e.state.path
+		this.show(this.convertToView(currentPath))
 	}
 	
 	
+	/**
+	 * Handle wrong view ID or view not found error
+	 */
+	 view404(err) {
+	 	alert(`ViewRouter: ${err}`);
+	 }
 	
 	
-}
+} //CLASS END
+
+
+
+
