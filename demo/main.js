@@ -1,5 +1,5 @@
-import ViewRouter from 'https://cdn.jsdelivr.net/npm/@bukunmikuti/view-router/+esm';
-//import ViewRouter from '../src/viewrouter.js';
+//import ViewRouter from 'https://cdn.jsdelivr.net/npm/@bukunmikuti/view-router/+esm';
+import ViewRouter from '../dist/esm/viewrouter.es.js';
 
 
 let v = new ViewRouter({

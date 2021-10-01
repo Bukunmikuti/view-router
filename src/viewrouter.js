@@ -1,11 +1,11 @@
-import embedTransition from './transitions.js';
+//import embedTransition from './transitions.js';
 import fetchView from './fetch_view.js'
 
 export default class ViewRouter {
 	constructor (options) {
 		this.options = options;
 		this.views = this.options.views;
-		this.enableTransition();
+		//this.enableTransition();
 		this.manageNavigation(this.options.navigation);
 		
 		//other inits
