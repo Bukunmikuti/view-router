@@ -1,3 +1,3 @@
-//import styles from './css/viewrouter.css';
 import ViewRouter from './viewrouter.js';
+import './css/viewrouter.css';
 export default ViewRouter;

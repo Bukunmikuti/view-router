@@ -2,61 +2,76 @@
 import ViewRouter from '../dist/esm/viewrouter.es.js';
 
 
+
+
 let v = new ViewRouter({
 	views: [
 		{
 			id: 'welcome',
-			path: '?welcome',
+			path: '/welcome',
+			mounted() {welcome()},
 		},
-
 		{
 			id: 'signup',
-			path: '?register',
-			mounted() {
-				template1();
-			},
-			render() {
-				console.log('Rendered 🎉');
-			}
+			path: '/register',
+			mounted() {register()},
+			render() {console.log('Rendered 🎉')},
 		},
-
 		{
 			id: 'login',
-			path: '?login',
-			mounted() {
-				setTimeout(() => {
-					document.querySelector('#h').textContent = 'Dynamic Template 2'
-				}, 2000)
-			},
-			render() {
-				console.log('Rendered Template 2')
-			}
-	},
-
+			path: '/login',
+			mounted() {login()},
+			render() {console.log('Rendered 2')}
+	    },
 		{
-			id: 'about',
-			path: '?about',
-	}
+			id: '404',
+			path: '/not-found',
+	    }
 	],
 
-	navigation: 'history',
-	transition: true,
+	navigation: 'hash',
+	transition: false,
 })
 
 
-let template1 = () => {
-	let alertBtn = document.querySelector('#alert')
-	alertBtn.onclick = e => {
-		hello()
-	};
-	let hello = () => {
-		alert('hello');
+v.start((id) => {
+	if (id == undefined) {
+		v.routeTo('welcome')
 	}
+})
+
+
+v.notFound((prevPath,currPath) => {
+	return '404'
+})
+
+function welcome(){
+	let signupBtn = document.querySelector('#signup-btn')
+	let loginBtn = document.querySelector('#login-btn')
+	signupBtn.onclick = () => {
+		v.routeTo('signup')
+	}
+	loginBtn.onclick = () => {
+		v.routeTo('login')
+	}
+}
+
+function register() {
+	let toLogin = document.querySelector('#toLogin')
+	toLogin.onclick = () => {
+		v.routeTo('login')
+	}
+}
+
+function login() {
+	let toRegister = document.querySelector('#toRegister')
+	toRegister.onclick = () => {
+		v.routeTo('signup')
+	}	
 }
 
 
 
-v.routeTo('welcome');
 
 
 

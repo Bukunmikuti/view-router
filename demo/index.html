@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>View Router</title>
-	<link rel="stylesheet" href="main.css"></link>
 </head>
 <body>
 <template id="welcome" class="v-router fadein">
@@ -19,30 +18,30 @@
 	<div id="welcome-footer">
 		<button id="signup-btn">Sign up</button>
 		<button id="login-btn">Login</button>
-		<a id="github-link" href="">See on Github</github>
 	</div>
 </template>
 
-<template id="signup" class="v-router fadein">
+<template id="signup" class="v-router flip-in-hor-top">
 	<div>
 		<h1>Sign Up 🚀</h1>
 		<p>Create your free account now free!</p>
-		<button id="alert">Register</button>
+		<button id="toLogin">Go To Login</button>
 	</div>
 </template>
 
-<template id="login" class="v-router fadeInLeft">
+<template id="login" class="v-router swing-in-right-fwd">
 	<div>
 		<h1>Log in ⚡</h1>
 		<p id="h">Welcome back! Sign into your account</p>
-		
 		<input placeholder="username" />
 		<input placeholder="password" />
-		<button>Sign in</button>
+		<button id="toRegister">Go To Register</button>
 	</div>
 </template>
 
-<template id="about" class="v-router fadeInRight"></template>
+<template id="404" class="v-router fade-in-right">
+	<h1>404: Page does not exist</h1>
+</template>
 
 
 

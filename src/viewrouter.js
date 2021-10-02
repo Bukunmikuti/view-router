@@ -1,11 +1,9 @@
-//import embedTransition from './transitions.js';
 import fetchView from './fetch_view.js'
 
 export default class ViewRouter {
 	constructor (options) {
 		this.options = options;
 		this.views = this.options.views;
-		//this.enableTransition();
 		this.manageNavigation(this.options.navigation);
 		
 		//other inits
@@ -197,17 +195,7 @@ async manageView(view) {
 	 		document.getElementById(view).hidden = true;
 	 	}
 	 }
-	
-	
-	/**
-	 * Call embedTransition() if transition is enabled
-	 **/
-	enableTransition() {
-		if (this.options.transition) {
-			embedTransition();
-		}
-	}
-	
+
 	
 	/**
 	 * Navi to url hash path on hash change event
@@ -263,7 +251,7 @@ async manageView(view) {
 	 * Handle wrong view ID or view not found error
 	 */
 	 view404(err) {
-	 	alert(`ViewRouter: ${err}`);
+		throw new Error(`ViewRouter: ${err}`);
 	 }
 	
 	

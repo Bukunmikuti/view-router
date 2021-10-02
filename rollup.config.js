@@ -1,7 +1,9 @@
 import { terser } from "rollup-plugin-terser";
+import styles from "rollup-plugin-styles";
 
 export default {
     input: './src/index.js',
+    plugins: [styles()],
     output: [
         {
             file: './dist/esm/viewrouter.es.js',
