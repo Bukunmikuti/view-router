@@ -1,5 +1,5 @@
 //import ViewRouter from 'https://cdn.jsdelivr.net/npm/@bukunmikuti/view-router/+esm';
-import ViewRouter from '../dist/esm/viewrouter.es.js';
+import ViewRouter from '../src/viewrouter.js';
 
 
 
@@ -36,7 +36,9 @@ let v = new ViewRouter({
 
 v.start((id) => {
 	if (id == undefined) {
-		v.routeTo('welcome')
+		v.routeTo('404')
+	} else if (id == 'welcome') {
+		v.routeTo('signup')
 	}
 })
 

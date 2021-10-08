@@ -29,6 +29,7 @@
  **Current behaviour:** The browser does nothing when back button is clicked and exits page on second click <br><br>
  **Expected behaviour:** To remove current view from screen by making it disappear <br><br>
  **Caveat:** When a template is the base view, clicking back to remove it from screen might not be user friendly
+ - [ ] refine Lifecycle hooks to help handle views entry and exit more effectively
 
 
 
@@ -46,4 +47,9 @@ Description: Defines ViewRouter behaviour if url path does not exist in ```views
 		- ```current path``` (optional): The unmatched and non-existent view path
 	The callback function executes whenever there is a navigation to an unmatched path. 
 
-> **Note:** You cannot call ```routeTo()``` inside the callback. To navigate to a 404 view or any other view, you must return the view ID instead. For example ```return "404"``` navigates to a 404 view. <br> ```return true``` or ```undefined```, takes the current view out of the screen while ```return false``` leaves the view on screen. 
+> **Note:** You cannot call ```routeTo()``` inside this callback. To navigate to a 404 view or any other view, you must return the view ID instead. For example ```return "404"``` navigates to a 404 view. <br> ```return true``` or ```undefined```, takes the current view out of the screen while ```return false``` leaves the view on screen. 
+
+## Breaking Changes
+- removed ```transition``` property
+- view router is now distributed in two build: defaut build (with transitions) and core build (excluding all transitions)
+> **Note:** Default build comes with all transition classes prebundled while the core build defines only view router main functionality. You can use the ```viewrouter.css``` file in the distribution to include transitions seperately or use a different animation library to handle transitions.
