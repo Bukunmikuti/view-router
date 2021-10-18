@@ -11,7 +11,7 @@ export default class ViewRouter {
 		this.previousView; //previous view ID
 		this.currentView; //current view ID
 		this.currentPath;
-		this.saveNotFound;
+		this.saveNotFound = this.options.notFound
 	}
 	
 	
@@ -34,27 +34,28 @@ export default class ViewRouter {
 	
 	
 	/**
-	 * Handle callback for unspecified path
-	 * If callback returns false, view dissapears from screen else if callback returns true, view remains in screen. Default behaviour is false
-	 * @param {function}
-	 * @returns callback
-	 */
-	 notFound(callback) {
-	 	let path = window.location.hash.split('#')[1];
-	 	this.saveNotFound = callback
-	 }
-	
-	
-	/**
 	 * Navigates to the specified view Id
 	 * @param {string} id
-	 * @returns 'render()' function and 'mounted()' for first navigation
+	 * Executes 'this.handle404' for undefined views
 	 */
 	routeTo(id) {
 		let view = this.convertToView(id);
 		
 		if (view == undefined) {
-			this.view404(`Cannot find view ID of ${id}`)
+			let path;
+			switch (this.options.navigation) {
+				case 'hash':
+					path = window.location.hash.split('#')[1];
+					this.handle404(path);
+					break
+				case 'history':
+					path = window.location.pathname;
+					this.handle404(path);
+					break;
+				default:
+					this.handle404(undefined);
+			}
+			return false;
 		}
 		
 		switch (this.options.navigation) {
@@ -209,13 +210,8 @@ async manageView(view) {
 		let view = this.convertToView(path)
 		
 		if (view == undefined) {
-			let re = this.saveNotFound(this.currentPath, path)
-			if (re == true || re == undefined) {
-				this.hideView(this.currentView);
-				this.currentPath = null
-			} else if (typeof(re) == 'string') {
-				this.show(this.convertToView(re));
-			}
+			this.handle404(path)
+			return false;
 		} else {
 			this.show(view)
 		}
@@ -232,13 +228,7 @@ async manageView(view) {
 	 */
 	_popstate(e) {
 		if (e.state == null) {
-			let re = this.saveNotFound(this.currentPath, window.location.pathname)
-			if (re == true || re == undefined) {
-				this.hideView(this.currentView);
-				this.currentPath = null
-			} else if (typeof(re) == 'string') {
-				this.show(this.convertToView(re));
-			}
+			this.handle404(window.location.pathname)
 			return false;
 		}
 		
@@ -247,12 +237,26 @@ async manageView(view) {
 	}
 	
 	
+	
 	/**
-	 * Handle wrong view ID or view not found error
+	 * Handle callback for unspecified path
+	 * If callback returns false, view dissapears from screen
+	 * If callback returns true, view remains in screen. 
+	 * Default behaviour is false
+	 * @param {path} - the undefined path
+	 * @returns current path and undefined path in `notFound`
 	 */
-	 view404(err) {
-		throw new Error(`ViewRouter: ${err}`);
+	 handle404(path) {
+	 	let re = this.saveNotFound(this.currentPath, path)
+	 	if (re == true || re == undefined) {
+	 		this.hideView(this.currentView);
+	 		this.currentPath = null
+	 	} else if (typeof(re) == 'string') {
+	 			this.show(this.convertToView(re));
+	 	}
 	 }
+	
+	
 	
 	
 } //CLASS END
