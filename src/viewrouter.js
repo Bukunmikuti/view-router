@@ -84,7 +84,7 @@ export default class ViewRouter {
 	 */
 	show (view) {
 		this.manageView(view);
-		this.manageLifecycle(view);
+		/*this.manageLifecycle(view);*/
 	}
 	
 	
@@ -138,13 +138,21 @@ async manageView(view) {
 		}
 		
 		if (this.currentView != null && this.currentView != view.id) {
+			//currentView Exists! 
+			let cv = this.convertToView(this.currentView)
+			this.manageLifecycle('beforeLeave', cv);
 			document.getElementById(this.currentView).hidden = true;
+			this.manageLifecycle('onLeave', cv);
 		}
 
 		if (this.mountedViews.includes(view.id) == false) {
+			this.manageLifecycle('beforeEnter', view);
 			this.mountView(temp, temp.content, view.id);
+			this.manageLifecycle('onEnter', view)
 		} else {
+			this.manageLifecycle('beforeEnter', view)
 			temp.hidden = false;
+			this.manageLifecycle('onEnter', view);
 		}
 		
 		this.previousView = this.currentView;
@@ -154,19 +162,36 @@ async manageView(view) {
 	
 	
 	/**
+	 * NEW HOOKS
 	 * Returns ViewRouter Lifestyle methods
-	 * View methods: mounted() and render()
-	 * returns mounted() only once at first navigation 
-	 * returns render() whenever view comes on screen
+	 * View methods: beforeEnter(), onEnter(), beforeLeave() and onLeave()
+	 * returns onEnter() whenever view comes on screen
 	 */
-	manageLifecycle(view) {
-		if (view.mounted != undefined) {
-			view.mounted();
-			view.mounted = undefined;
+	manageLifecycle(action, view) {
+		if (view == undefined || view.hooks == undefined) {
+			return false;
 		}
 		
-		if (view.render != undefined) {
-				view.render();
+		if (action == 'beforeEnter' && view.hooks.beforeEnter != undefined) {
+			//implemented
+			view.hooks.beforeEnter()
+		}
+		
+		if (action == 'onEnter' && view.hooks.onEnter != undefined) {
+			//implemented
+			let element = document.getElementById(view.id)
+			view.hooks.onEnter(element)
+		}
+		
+		if (action == 'beforeLeave' && view.hooks.beforeLeave != undefined) {
+			//implemented
+			let element = document.getElementById(view.id)
+			view.hooks.beforeLeave(element)
+		}
+		
+		if (action == 'onLeave' && view.hooks.onLeave != undefined) {
+			//implemented
+			view.hooks.onLeave()
 		}
 	}
 	
@@ -236,6 +261,10 @@ async manageView(view) {
 		this.show(this.convertToView(currentPath))
 	}
 	
+	
+	$animate(sel) {
+		console.log(sel)
+	}
 	
 	
 	/**

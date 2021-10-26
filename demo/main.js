@@ -14,38 +14,49 @@ let v = new ViewRouter({
 		{
 			id: 'signup',
 			path: '/register',
-			mounted() {register()},
-			render() {console.log('Rendered 🎉')},
+			hooks: {
+				beforeEnter() {
+					console.log('Register before Enter')
+				},
+				onEnter(el) {
+					console.log('Register entered!')
+					//el.style.background = 'red'
+				},
+				beforeLeave(el) {
+					console.log('Register would leave now')
+				},
+				onLeave() {
+					console.log('Register Left')
+				},
+			}
 		},
 		{
 			id: 'login',
 			path: '/login',
 			mounted() {login()},
 			render() {console.log('Rendered 2')}
-	    },
+	 },
 		{
 			id: '404',
 			path: '/not-found',
-	    }
+	 }
 	],
 
 	navigation: 'hash',
 	transition: false,
+	notFound: (prevPath, currPath) => {
+		console.log(prevPath + '' + currPath)
+		return '404'
+	}
 })
 
 
 v.start((id) => {
 	if (id == undefined) {
-		v.routeTo('404')
-	} else if (id == 'welcome') {
-		v.routeTo('signup')
+		v.routeTo('welcome')
 	}
 })
 
-
-v.notFound((prevPath,currPath) => {
-	return '404'
-})
 
 function welcome(){
 	let signupBtn = document.querySelector('#signup-btn')

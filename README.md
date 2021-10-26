@@ -31,7 +31,8 @@
  **Caveat:** When a template is the base view, clicking back to remove it from screen might not be user friendly
  - [ ] refine Lifecycle hooks to help handle views entry and exit more effectively. 
  - > **proposed Lifecycle hooks:** <br> beforeEnter() <br> onEnter() <br> beforeLeave() <br> onLeave()
- - [ ] create ```v.animate()``` method to manipulate default transitions in Lifecycle hooks. The other option is to use HTML attributes to specify in and out animations. 
+ - [ ] create ```this.$animate()``` instance method to manipulate default transitions in Lifecycle hooks. The other option is to use HTML attributes to specify in and out animations.
+ - [ ] Implement scroll options
 
 
 
