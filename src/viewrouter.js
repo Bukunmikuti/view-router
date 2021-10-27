@@ -6,12 +6,24 @@ export default class ViewRouter {
 		this.views = this.options.views;
 		this.manageNavigation(this.options.navigation);
 		
+
 		//other inits
 		this.mountedViews = [];
 		this.previousView; //previous view ID
-		this.currentView; //current view ID
+		this.currentViewID; //current view ID
 		this.currentPath;
 		this.saveNotFound = this.options.notFound
+		
+		this.resetAllViews()
+	}
+	
+	
+	resetAllViews() {
+		let views = document.querySelectorAll('.v-router');
+		views.forEach(view => {
+			let temp = document.getElementById(view.id)
+			this.mountView(temp, temp.content, view.id);
+		})
 	}
 	
 	
@@ -65,13 +77,13 @@ export default class ViewRouter {
 				}
 				break;
 			case 'history':
-				if (view.id != this.currentView) {
+				if (view.id != this.currentViewID) {
 					this.show(view);
 					window.history.pushState({path:view.path, id:view.id} ,'', view.path)
 				}
 				break;
 			default:
-				if (view.id != this.currentView) {
+				if (view.id != this.currentViewID) {
 					this.show(view)
 				}
 		}
@@ -123,7 +135,7 @@ export default class ViewRouter {
 	/**
 	 * checks if view has been mounted and toggle _hidden_ attribute
 	 * calls mountView() if view has not been mounted
-	 * sets currentView to currently on-screen view
+	 * sets currentViewID to currently on-screen view
 	 */
 async manageView(view) {
 		if (view.origin != undefined && view.origin != false) {
@@ -137,11 +149,11 @@ async manageView(view) {
 			throw new Error(`No such template as: ${view.id}`)
 		}
 		
-		if (this.currentView != null && this.currentView != view.id) {
-			//currentView Exists! 
-			let cv = this.convertToView(this.currentView)
+		if (this.currentViewID != null && this.currentViewID != view.id) {
+			//currentViewID Exists! 
+			let cv = this.convertToView(this.currentViewID)
 			this.manageLifecycle('beforeLeave', cv);
-			document.getElementById(this.currentView).hidden = true;
+			document.getElementById(this.currentViewID).hidden = true;
 			this.manageLifecycle('onLeave', cv);
 		}
 
@@ -155,8 +167,8 @@ async manageView(view) {
 			this.manageLifecycle('onEnter', view);
 		}
 		
-		this.previousView = this.currentView;
-		this.currentView = view.id;
+		this.previousView = this.currentViewID;
+		this.currentViewID = view.id;
 		this.currentPath = view.path;
 	}
 	
@@ -204,7 +216,7 @@ async manageView(view) {
 	mountView(temp, content, id) {
 		let hiddenDiv = document.createElement('div');
 		hiddenDiv.append(content);
-		hiddenDiv.hidden = false;
+		hiddenDiv.hidden = true;
 		hiddenDiv.id = id;
 		hiddenDiv.className = temp.className;
 		temp.parentNode.replaceChild(hiddenDiv, temp);
@@ -216,7 +228,7 @@ async manageView(view) {
 	 * Hide visible view from screen
 	 */
 	 hideView(view) {
-	 	if (this.currentView == view) {
+	 	if (this.currentViewID == view) {
 	 		console.log(view)
 	 		document.getElementById(view).hidden = true;
 	 	}
@@ -278,7 +290,7 @@ async manageView(view) {
 	 handle404(path) {
 	 	let re = this.saveNotFound(this.currentPath, path)
 	 	if (re == true || re == undefined) {
-	 		this.hideView(this.currentView);
+	 		this.hideView(this.currentViewID);
 	 		this.currentPath = null
 	 	} else if (typeof(re) == 'string') {
 	 			this.show(this.convertToView(re));

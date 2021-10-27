@@ -30,9 +30,16 @@
  **Expected behaviour:** To remove current view from screen by making it disappear <br><br>
  **Caveat:** When a template is the base view, clicking back to remove it from screen might not be user friendly
  - [ ] refine Lifecycle hooks to help handle views entry and exit more effectively. 
- - > **proposed Lifecycle hooks:** <br> beforeEnter() <br> onEnter() <br> beforeLeave() <br> onLeave()
- - [ ] create ```this.$animate()``` instance method to manipulate default transitions in Lifecycle hooks. The other option is to use HTML attributes to specify in and out animations.
- - [ ] Implement scroll options
+ - > **proposed Lifecycle hooks:** <br> beforeEnter() <br> onEnter() <br> beforeLeave() <br> onLeave() 
+ <hr>
+All Lifecycle hooks receives a ```data``` argument:
+```javascript
+let hello = false
+```
+
+<hr>
+ - [ ] Use HTML attributes to specify in and out transitions. ```v:in="fade-in"``` and ```v:out="fade-out"``` or ```v:animate="fade-in fade-out"```
+ - [ ] Implement scroll options — ```autoScroll: true||false```
 
 
 

@@ -1,14 +1,18 @@
-//import ViewRouter from 'https://cdn.jsdelivr.net/npm/@bukunmikuti/view-router/+esm';
-import ViewRouter from '../src/viewrouter.js';
-
-
-
+import ViewRouter from '../../src/viewrouter.js';
 
 let v = new ViewRouter({
 	views: [
 		{
 			id: 'welcome',
 			path: '/welcome',
+			hooks: {
+			 onEnter(data) {
+			  let signupBtn = document.querySelector('#signup-btn')
+			  signupBtn.onclick = () => {
+			   v.routeTo('signup')
+			  }
+			 }
+			}
 		},
 		
 		{
@@ -30,10 +34,12 @@ let v = new ViewRouter({
 				},
 			}
 		},
+		
 		{
 			id: 'login',
 			path: '/login',
 	 },
+	 
 		{
 			id: '404',
 			path: '/not-found',
@@ -56,12 +62,11 @@ v.start((id) => {
 })
 
 
+	
 function welcome(){
-	let signupBtn = document.querySelector('#signup-btn')
+	
 	let loginBtn = document.querySelector('#login-btn')
-	signupBtn.onclick = () => {
-		v.routeTo('signup')
-	}
+	
 	loginBtn.onclick = () => {
 		v.routeTo('login')
 	}
