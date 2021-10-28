@@ -43,6 +43,14 @@ let v = new ViewRouter({
 		{
 			id: '404',
 			path: '/not-found',
+			hooks: {
+			 beforeEnter() {
+			  console.log('🙄')
+			 }, 
+			 onEnter() {
+			  console.log('😐😐')
+			 }
+			}
 	 }
 	],
 
@@ -57,7 +65,7 @@ let v = new ViewRouter({
 
 v.start((id) => {
 	if (id == undefined) {
-		v.routeTo('welcome')
+		v.routeTo('welcomee')
 	}
 })
 

@@ -96,7 +96,6 @@ export default class ViewRouter {
 	 */
 	show (view) {
 		this.manageView(view);
-		/*this.manageLifecycle(view);*/
 	}
 	
 	
@@ -134,7 +133,7 @@ export default class ViewRouter {
 	
 	/**
 	 * checks if view has been mounted and toggle _hidden_ attribute
-	 * calls mountView() if view has not been mounted
+	 * calls mountView() if view has not been mounted - BREAKING: All views have already been mounted by resetAllViews() on initialization
 	 * sets currentViewID to currently on-screen view
 	 */
 async manageView(view) {
@@ -144,7 +143,6 @@ async manageView(view) {
 		}
 		
 		let temp = document.getElementById(view.id);
-		
 		if (temp == null) {
 			throw new Error(`No such template as: ${view.id}`)
 		}
@@ -157,15 +155,9 @@ async manageView(view) {
 			this.manageLifecycle('onLeave', cv);
 		}
 
-		if (this.mountedViews.includes(view.id) == false) {
-			this.manageLifecycle('beforeEnter', view);
-			this.mountView(temp, temp.content, view.id);
-			this.manageLifecycle('onEnter', view)
-		} else {
-			this.manageLifecycle('beforeEnter', view)
-			temp.hidden = false;
-			this.manageLifecycle('onEnter', view);
-		}
+		this.manageLifecycle('beforeEnter', view)
+		temp.hidden = false;
+		this.manageLifecycle('onEnter', view);
 		
 		this.previousView = this.currentViewID;
 		this.currentViewID = view.id;
@@ -271,11 +263,6 @@ async manageView(view) {
 		
 		let currentPath = e.state.path
 		this.show(this.convertToView(currentPath))
-	}
-	
-	
-	$animate(sel) {
-		console.log(sel)
 	}
 	
 	

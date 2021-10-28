@@ -25,19 +25,38 @@
  # Roadmap 🚧
  Roadmap and checklist for v1.1.1 release
  
- - [x] Make current view 'disappear' or go off screen if back button is pressed and there is no view to nativage to. <br><br>
- **Current behaviour:** The browser does nothing when back button is clicked and exits page on second click <br><br>
- **Expected behaviour:** To remove current view from screen by making it disappear <br><br>
- **Caveat:** When a template is the base view, clicking back to remove it from screen might not be user friendly
- - [ ] refine Lifecycle hooks to help handle views entry and exit more effectively. 
- - > **proposed Lifecycle hooks:** <br> beforeEnter() <br> onEnter() <br> beforeLeave() <br> onLeave() 
- <hr>
+ - [x] Make current view 'disappear' or go off screen if back button is pressed and there is no view to nativage to. <br>
+ **Current behaviour:** The browser does nothing when back button is clicked and exits page on second click <br>
+ **Expected behaviour:** To remove current view from screen by making it disappear <br>
+ **Caveat:** When a template is the base view, clicking back to remove it from screen might not be user friendly <br><br>
+ - [ ] refine Lifecycle hooks to help handle views entry and exit more effectively. <br>
+ **proposed Lifecycle hooks:** <br> beforeEnter() <br> onEnter() <br> beforeLeave() <br> onLeave() 
+ 
+---
 All Lifecycle hooks receives a ```data``` argument:
 ```javascript
-let hello = false
+data: {
+ current: {
+  view: HTMLElement //CURRENT view container
+  path: //CURRENT path
+ }, 
+ previous: {
+  view: HTMLElement //PREVIOUS view container
+  path: //PREVIOUS path
+ }
+}
 ```
+**Note:** <br>
+**```beforeEnter```:** The view is called but yet to be displayed. Note that the previous view is out of screen by now. It is called after ```onLeave``` of the previous view. <br><br>
 
-<hr>
+**```onEnter```:** The view is now on screen. This hook is called after ```beforeEnter``` <br><br>
+
+**```beforeLeave```:** This hook is called before the current view leaves the screen. That is, the view is still on screen though  a new view has been called. <br><br>
+
+**```onLeave```:** The view is now out of screen and the incoming view is also not on screen. It is called before ```beforeEnter``` of incoming view
+
+---
+
  - [ ] Use HTML attributes to specify in and out transitions. ```v:in="fade-in"``` and ```v:out="fade-out"``` or ```v:animate="fade-in fade-out"```
  - [ ] Implement scroll options — ```autoScroll: true||false```
 
