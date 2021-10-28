@@ -6,7 +6,6 @@ export default class ViewRouter {
 		this.views = this.options.views;
 		this.manageNavigation(this.options.navigation);
 		
-
 		//other inits
 		this.mountedViews = [];
 		this.previousView; //previous view ID
@@ -175,6 +174,16 @@ async manageView(view) {
 		if (view == undefined || view.hooks == undefined) {
 			return false;
 		}
+
+		/* 
+		For beforeLeave() and onLeave() of all views
+		this.currentViewID: The onsceen view id, same with view.id
+		view: The onscreen view object 
+
+		For beforeEnter() and onEnter()
+		this.currentViewID: The previous view id
+		view: The view object of the incoming view
+		*/
 		
 		if (action == 'beforeEnter' && view.hooks.beforeEnter != undefined) {
 			//implemented
