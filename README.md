@@ -68,7 +68,7 @@ data regarding the current view definition and not the incoming view
 ---
 
  - [ ] Use HTML attributes to specify in and out transitions. ```v:in="fade-in"``` and ```v:out="fade-out"``` or ```v:animate="fade-in fade-out"```
- - [ ] Implement scroll options — ```autoScroll: true||false```
+ - [ ] Implement scroll options — ```resetScroll: true||false```
 
 
 
@@ -88,6 +88,10 @@ Description: Defines ViewRouter behaviour if requested url path does not exist i
 	This function executes whenever there is a navigation to an unmatched path. 
 
 > **Note:** You cannot call ```routeTo()``` inside this callback. To navigate to a 404 view or any other view, you must return the view ID instead. For example ```return "404"``` navigates to a 404 view. <br> ```return true``` or ```undefined```, takes the current view out of the screen while ```return false``` leaves the view on screen. 
+
+## ```resetScroll```
+Description: Navigation to a new view preserves the window scroll position, this is the expected browser behaviour. However, this is usually unintuitive when a view takes up the whole screen. Therefore, setting ```resetScroll: true``` returns scroll position to top of the screen when entering a new view. <br>
+> **Note:** If you want a more elegant solution to scroll implantation, you can set ```resetScroll:false``` and use hooks to adjust scroll effects. 
 
 ## Breaking Changes
 - removed ```transition``` property

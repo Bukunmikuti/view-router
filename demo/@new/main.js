@@ -65,6 +65,7 @@ let v = new ViewRouter({
 
 	navigation: 'hash',
 	transition: false, //deprecated
+	resetScroll: true, 
 	notFound: (prevPath, currPath) => {
 		console.log(prevPath + '' + currPath)
 		return '404'

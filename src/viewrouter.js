@@ -195,7 +195,6 @@ async manageView(view) {
 		 }
 		}
 		
-		
 		// beforeEnter and onEnter
 		if (action == 'beforeEnter' || action == 'onEnter') {
 		  data = {
@@ -210,6 +209,11 @@ async manageView(view) {
 		   path: view.path
 		  }
 		 }
+		}
+		
+		//resetScroll implementation
+		if (this.options.resetScroll && action == 'beforeEnter') {
+		 window.scrollTo(0, 0)
 		}
 		
 		if (action == 'beforeEnter' && view.hooks.beforeEnter != undefined) {
