@@ -19,12 +19,16 @@ let v = new ViewRouter({
 			id: 'signup',
 			path: '/register',
 			hooks: {
-				beforeEnter() {
+				beforeEnter(data) {
 					console.log('Register before Enter')
 				},
-				onEnter(el) {
+				onEnter(data) {
 					console.log('Register entered!')
-					//el.style.background = 'red'
+					data.current.view.classList.add('scale-in-hor-left');
+					let login = data.current.view.querySelector('#toLogin')
+					login.onclick = () => {
+					 v.routeTo('login')
+					}
 				},
 				beforeLeave(el) {
 					console.log('Register would leave now')
@@ -38,6 +42,11 @@ let v = new ViewRouter({
 		{
 			id: 'login',
 			path: '/login',
+			hooks: {
+			 onEnter(data){
+			  data.current.view.classList.add('swing-in-right-fwd');
+			 }
+			}
 	 },
 	 
 		{
@@ -65,7 +74,7 @@ let v = new ViewRouter({
 
 v.start((id) => {
 	if (id == undefined) {
-		v.routeTo('welcomee')
+		v.routeTo('welcome')
 	}
 })
 

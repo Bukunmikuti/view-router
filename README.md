@@ -36,16 +36,22 @@
 All Lifecycle hooks receives a ```data``` argument:
 ```javascript
 data: {
- current: {
-  view: HTMLElement //CURRENT view container
-  path: //CURRENT path
- }, 
  previous: {
-  view: HTMLElement //PREVIOUS view container
-  path: //PREVIOUS path
- }
+   view: HTMLElement //PREVIOUS view Element
+   path: String 
+   id: String
+ }, 
+ current: {
+  view: HTMLElement //CURRENT view Element
+  path: String //CURRENT path
+  id: String
+ }, 
 }
 ```
+**```data.previous```:** Contains previous view data. 
+**```data.current```:** Contains current view data
+
+
 **Note:** <br>
 **```beforeEnter```:** The view is called but yet to be displayed. Note that the previous view is out of screen by now. It is called after ```onLeave``` of the previous view. <br><br>
 
@@ -54,6 +60,10 @@ data: {
 **```beforeLeave```:** This hook is called before the current view leaves the screen. That is, the view is still on screen though  a new view has been called. <br><br>
 
 **```onLeave```:** The view is now out of screen and the incoming view is also not on screen. It is called before ```beforeEnter``` of incoming view
+
+> **Caution 💡:** <br>
+The current view from ```data.current.view``` might be off screen and hidden when accessed from ```beforeEnter``` and ```onLeave``` hooks. This is because the ```data.current``` only retrieves
+data regarding the current view definition and not the incoming view
 
 ---
 

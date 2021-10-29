@@ -8,7 +8,8 @@ export default class ViewRouter {
 		
 		//other inits
 		this.mountedViews = [];
-		this.previousView; //previous view ID
+		this.previousViewID; //previous view ID
+		this.previousPath;
 		this.currentViewID; //current view ID
 		this.currentPath;
 		this.saveNotFound = this.options.notFound
@@ -158,8 +159,9 @@ async manageView(view) {
 		temp.hidden = false;
 		this.manageLifecycle('onEnter', view);
 		
-		this.previousView = this.currentViewID;
+		this.previousViewID = this.currentViewID;
 		this.currentViewID = view.id;
+		this.previousPath = this.currentPath
 		this.currentPath = view.path;
 	}
 	
@@ -167,44 +169,63 @@ async manageView(view) {
 	/**
 	 * NEW HOOKS
 	 * Returns ViewRouter Lifestyle methods
-	 * View methods: beforeEnter(), onEnter(), beforeLeave() and onLeave()
+	 * hook methods: beforeEnter(), onEnter(), beforeLeave() and onLeave()
 	 * returns onEnter() whenever view comes on screen
+	 * emits data [Object] argument in hooks callback function
 	 */
 	manageLifecycle(action, view) {
 		if (view == undefined || view.hooks == undefined) {
 			return false;
 		}
-
-		/* 
-		For beforeLeave() and onLeave() of all views
-		this.currentViewID: The onsceen view id, same with view.id
-		view: The onscreen view object 
-
-		For beforeEnter() and onEnter()
-		this.currentViewID: The previous view id
-		view: The view object of the incoming view
-		*/
+		
+		let data;
+		// beforeLeave and onLeave
+		if (action == 'beforeLeave' || action == 'onLeave') {
+		 data = {
+		  previous: {
+		   view: document.getElementById(this.previousViewID),
+		   id: this.previousViewID,
+		   path: this.previousPath,
+		  },
+		  current: {
+		   view: document.getElementById(this.currentViewID),
+		   id: this.currentViewID,
+		   path: this.currentPath
+		  }
+		 }
+		}
+		
+		
+		// beforeEnter and onEnter
+		if (action == 'beforeEnter' || action == 'onEnter') {
+		  data = {
+		   previous: {
+		   view: document.getElementById(this.currentViewID),
+		   id: this.currentViewID,
+		   path: this.currentPath
+		  }, 
+		  current: {
+		   view: document.getElementById(view.id), 
+		   id: view.id, 
+		   path: view.path
+		  }
+		 }
+		}
 		
 		if (action == 'beforeEnter' && view.hooks.beforeEnter != undefined) {
-			//implemented
-			view.hooks.beforeEnter()
+			view.hooks.beforeEnter(data)
 		}
 		
 		if (action == 'onEnter' && view.hooks.onEnter != undefined) {
-			//implemented
-			let element = document.getElementById(view.id)
-			view.hooks.onEnter(element)
+			view.hooks.onEnter(data)
 		}
 		
 		if (action == 'beforeLeave' && view.hooks.beforeLeave != undefined) {
-			//implemented
-			let element = document.getElementById(view.id)
-			view.hooks.beforeLeave(element)
+			view.hooks.beforeLeave(data)
 		}
 		
 		if (action == 'onLeave' && view.hooks.onLeave != undefined) {
-			//implemented
-			view.hooks.onLeave()
+			view.hooks.onLeave(data)
 		}
 	}
 	
