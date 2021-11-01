@@ -216,6 +216,11 @@ async manageView(view) {
 		 window.scrollTo(0, 0)
 		}
 		
+		//data-vrouter-animate
+		if (action == 'onEnter') {
+		 console.log(data.current.view.dataset.g)
+		}
+		
 		if (action == 'beforeEnter' && view.hooks.beforeEnter != undefined) {
 			view.hooks.beforeEnter(data)
 		}
