@@ -66,9 +66,9 @@ The current view from ```data.current.view``` might be off screen and hidden whe
 data regarding the current view definition and not the incoming view
 
 ---
-
- - [ ] Use HTML attributes to specify in and out transitions. ```v:in="fade-in"``` and ```v:out="fade-out"``` or ```v:animate="fade-in fade-out"```
- - [x] Implement scroll options — ```resetScroll: true||false```
+- Change from using ```<template></template>``` to define views in HTML to using any block-level elements. This removes the need to mount views.
+- [ ] Use HTML attributes to specify in and out transitions. ```data-v-in="fade-in"``` and ```data-v-out="fade-out"``` or ```data-v-animate="fade-in fade-out"```
+- [x] Implement scroll options — ```resetScroll: true||false```
 
 
 
@@ -94,9 +94,24 @@ data regarding the current view definition and not the incoming view
 > **Note:** If you want a more elegant solution to scroll implantation, you can set ```resetScroll:false``` and use hooks to adjust scroll effects. 
 
 ## Breaking Changes
-- removed ```transition``` property
-- view router is now distributed in two build: default build (with transitions) and core build (excluding all transitions)
+- Removed ```transition``` property
+- View Router is now distributed in two build: default build (with transitions) and core build (excluding all transitions)
 > **Note:** <br> Default build comes with all transition classes prebundled while the core build defines only view router main functionality. You can use the ```viewrouter.css``` file in the distribution to include transitions seperately or use a different animation library to handle transitions.
+- The use of ```template``` tags to define views in HTML is now deprecated and should not be used anymore. Use any block-level container (like ```div``` or ```section```) to define views instead.
+
+*Deprecated:*<br> 
+```html 
+<template id='page1' class='v-router'>
+  <!-- view -->
+</template>
+```
+*Now use:*<br>
+```html
+<div id='page1' class='v-router' hidden>
+<!-- view -->
+</div>
+```
+
 
 ## Credits 🙌
 ### Animista

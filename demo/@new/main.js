@@ -5,12 +5,10 @@ let v = new ViewRouter({
 		{
 			id: 'welcome',
 			path: '/welcome',
+			
 			hooks: {
 			 onEnter(data) {
-			  let signupBtn = document.querySelector('#signup-btn')
-			  signupBtn.onclick = () => {
-			   v.routeTo('signup')
-			  }
+			  
 			 }
 			}
 		},
@@ -79,31 +77,10 @@ v.start((id) => {
 	}
 })
 
-
-	
-function welcome(){
-	
-	let loginBtn = document.querySelector('#login-btn')
-	
-	loginBtn.onclick = () => {
-		v.routeTo('login')
-	}
+let signupBtn = document.querySelector('#signup-btn')
+signupBtn.onclick = () => {
+	v.routeTo('signup')
 }
-
-function register() {
-	let toLogin = document.querySelector('#toLogin')
-	toLogin.onclick = () => {
-		v.routeTo('login')
-	}
-}
-
-function login() {
-	let toRegister = document.querySelector('#toRegister')
-	toRegister.onclick = () => {
-		v.routeTo('signup')
-	}	
-}
-
 
 
 

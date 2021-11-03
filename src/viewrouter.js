@@ -14,16 +14,6 @@ export default class ViewRouter {
 		this.currentPath;
 		this.saveNotFound = this.options.notFound
 		
-		this.resetAllViews()
-	}
-	
-	
-	resetAllViews() {
-		let views = document.querySelectorAll('.v-router');
-		views.forEach(view => {
-			let temp = document.getElementById(view.id)
-			this.mountView(temp, temp.content, view.id);
-		})
 	}
 	
 	
@@ -133,7 +123,6 @@ export default class ViewRouter {
 	
 	/**
 	 * checks if view has been mounted and toggle _hidden_ attribute
-	 * calls mountView() if view has not been mounted - BREAKING: All views have already been mounted by resetAllViews() on initialization
 	 * sets currentViewID to currently on-screen view
 	 */
 async manageView(view) {
@@ -142,8 +131,8 @@ async manageView(view) {
 			view.origin = undefined;
 		}
 		
-		let temp = document.getElementById(view.id);
-		if (temp == null) {
+		let viewEl = document.getElementById(view.id);
+		if (viewEl == null) {
 			throw new Error(`No such template as: ${view.id}`)
 		}
 		
@@ -156,7 +145,7 @@ async manageView(view) {
 		}
 
 		this.manageLifecycle('beforeEnter', view)
-		temp.hidden = false;
+		viewEl.hidden = false;
 		this.manageLifecycle('onEnter', view);
 		
 		this.previousViewID = this.currentViewID;
@@ -218,7 +207,7 @@ async manageView(view) {
 		
 		//data-vrouter-animate
 		if (action == 'onEnter') {
-		 console.log(data.current.view.dataset.g)
+		 console.log(data.current.view.dataset.vAnimate)
 		}
 		
 		if (action == 'beforeEnter' && view.hooks.beforeEnter != undefined) {
@@ -237,23 +226,6 @@ async manageView(view) {
 			view.hooks.onLeave(data)
 		}
 	}
-	
-	
-	/**
-	 * replace <template> with <div>
-	 * make div hidden
-	 * add div/view ID to mountedViews[]
-	 */
-	mountView(temp, content, id) {
-		let hiddenDiv = document.createElement('div');
-		hiddenDiv.append(content);
-		hiddenDiv.hidden = true;
-		hiddenDiv.id = id;
-		hiddenDiv.className = temp.className;
-		temp.parentNode.replaceChild(hiddenDiv, temp);
-		this.mountedViews.push(id);
-	}
-	
 	
 	/**
 	 * Hide visible view from screen

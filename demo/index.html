@@ -6,47 +6,11 @@
 	<title>View Router</title>
 </head>
 <body>
-<template id="welcome" class="v-router fadein">
-	<h1>View Router <span>Demo</span></h1>
-	<p>A simple view-router.js demo with three views. This demo uses URL parameters: 
-	<code>?welcome</code> 
-	<code>?signup</code> 
-	<code>?login</code>
-	for navigation.
-	</p>
-	
-	<div id="welcome-footer">
-		<button id="signup-btn">Sign up</button>
-		<button id="login-btn">Login</button>
-		<a href="#signup" >Sign up</a>
-	</div>
-</template>
-
-<template id="signup" class="v-router flip-in-hor-top">
-	<div>
-		<h1>Sign Up 🚀</h1>
-		<p>Create your free account now free!</p>
-		<button id="toLogin">Go To Login</button>
-	</div>
-</template>
-
-<template id="login" class="v-router swing-in-right-fwd">
-	<div>
-		<h1>Log in ⚡</h1>
-		<p id="h">Welcome back! Sign into your account</p>
-		<input placeholder="username" />
-		<input placeholder="password" />
-		<button id="toRegister">Go To Register</button>
-	</div>
-</template>
-
-<template id="404" class="v-router fade-in-right">
-	<h1>404: Page does not exist</h1>
-</template>
 
 
-<div id="welcome" class="v-router" v:animate="fade-in-right fade-out">
+<div id="page2" class="v-router" v:animate="fade-in-right fade-out">
 	<h1>Hello World 👋😊</h1>
+	<p>This is another page to be handled by View Router</p>
 </div>
 
 
@@ -78,6 +42,5 @@
 <!--
 <script src='../dist/viewrouter.umd.min.js'></script>
 -->
-<script type="module" src="main.js"></script>
 </body>
 </html>

@@ -7,38 +7,44 @@
 	<link rel="stylesheet" href="../../src/css/viewrouter.css">
 </head>
 <body>
-	
-	<template id="welcome" class="v-router" data-g="yes good">
+
+	<div id="v-router-container">
+		<main id="page" class="v-router @inherit" data-v-animate="fade-in fade-out">
+			<!-- implementation example -->
+		</main>
+	</div>
+
+	<section id="welcome" class="v-router" data-v-animate="yes good" hidden>
 		<h1>View Router <span>Demo</span></h1>
-	<p>A simple view-router.js demo with three views. This demo uses URL parameters: 
-	<code>?welcome</code> 
-	<code>?signup</code> 
-	<code>?login</code>
-	for navigation.
-	</p>
+		<p>A simple view-router.js demo with three views. This demo uses URL parameters:
+			<code>?welcome</code>
+			<code>?signup</code>
+			<code>?login</code>
+			for navigation.
+		</p>
 	
 		<button id="signup-btn">Sign up</button>
 		<button id="login-btn">Login</button>
-		<a href="#signup" >Sign up</a>
-</template>
-
-<template id="signup" class="v-router">
+		<a href="#signup">Sign up</a>
+	</section>
+	
+	<section id="signup" class="v-router" hidden>
 		<h1>Sign Up 🚀</h1>
 		<p>Create your free account now free!</p>
 		<button id="toLogin">Go To Login</button>
-</template>
-
-<template id="login" class="v-router" hidden>
-	<h1>Log in ⚡</h1>
-	<p id="h">Welcome back! Sign into your account</p>
-	<input placeholder="username" />
-	<input placeholder="password" />
-	<button id="toRegister">Go To Register</button>
-</template>
-
-<template id="404" class="v-router">
-	<h1>404: Page does not exist</h1>
-</template>
+	</section>
+	
+	<section id="login" class="v-router" hidden>
+		<h1>Log in ⚡</h1>
+		<p id="h">Welcome back! Sign into your account</p>
+		<input placeholder="username" />
+		<input placeholder="password" />
+		<button id="toRegister">Go To Register</button>
+	</section>
+	
+	<section id="404" class="v-router" hidden>
+		<h1>404: Page does not exist</h1>
+	</section>
 
 
 
