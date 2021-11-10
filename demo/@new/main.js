@@ -5,14 +5,14 @@ let v = new ViewRouter({
 		{
 			id: 'welcome',
 			path: '/welcome',
-			
+
 			hooks: {
-			 onEnter(data) {
-			  
-			 }
+				onEnter(data) {
+
+				}
 			}
 		},
-		
+
 		{
 			id: 'signup',
 			path: '/register',
@@ -25,7 +25,7 @@ let v = new ViewRouter({
 					data.current.view.classList.add('scale-in-hor-left');
 					let login = data.current.view.querySelector('#toLogin')
 					login.onclick = () => {
-					 v.routeTo('login')
+						v.routeTo('login')
 					}
 				},
 				beforeLeave(el) {
@@ -36,29 +36,40 @@ let v = new ViewRouter({
 				},
 			}
 		},
-		
+
 		{
 			id: 'login',
 			path: '/login',
 			hooks: {
-			 onEnter(data){
-			  data.current.view.classList.add('swing-in-right-fwd');
-			 }
+				onEnter(data) {
+					data.current.view.classList.add('fade-in');
+				}
 			}
-	 },
-	 
+		},
+		{
+			id: 'second',
+			origin: '../second.html',
+			path: '/second',
+
+			hooks: {
+				onEnter(data) {
+
+				}
+			}
+		},
+
 		{
 			id: '404',
 			path: '/not-found',
 			hooks: {
-			 beforeEnter() {
-			  console.log('🙄')
-			 }, 
-			 onEnter() {
-			  console.log('😐😐')
-			 }
+				beforeEnter() {
+					console.log('🙄')
+				},
+				onEnter() {
+					console.log('😐😐')
+				}
 			}
-	 }
+		}
 	],
 
 	navigation: 'hash',

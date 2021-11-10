@@ -1,19 +1,28 @@
-import fetchView from './fetch_view.js'
 
 export default class ViewRouter {
 	constructor (options) {
 		this.options = options;
 		this.views = this.options.views;
 		this.manageNavigation(this.options.navigation);
+		this.prepareContainer()
 		
 		//other inits
+		this.container;
 		this.mountedViews = [];
 		this.previousViewID; //previous view ID
 		this.previousPath;
 		this.currentViewID; //current view ID
 		this.currentPath;
 		this.saveNotFound = this.options.notFound
-		
+	}
+
+	prepareContainer() {
+		if (document.getElementById('v-router-container') == null) {
+			let container = document.createElement('div')
+			container.id = 'v-router-container'
+			document.body.insertAdjacentElement('afterbegin', container)
+		}
+		this.container = document.getElementById('v-router-container')
 	}
 	
 	
@@ -127,7 +136,7 @@ export default class ViewRouter {
 	 */
 async manageView(view) {
 		if (view.origin != undefined && view.origin != false) {
-			await fetchView(view.origin, view.id);
+			await this.fetchView(view.origin, view.id);
 			view.origin = undefined;
 		}
 		
@@ -140,18 +149,44 @@ async manageView(view) {
 			//currentViewID Exists! 
 			let cv = this.convertToView(this.currentViewID)
 			this.manageLifecycle('beforeLeave', cv);
+			// animate out
 			document.getElementById(this.currentViewID).hidden = true;
+			this.container.insertAdjacentElement('afterend', document.getElementById(this.currentViewID))
+			this.container.innerHTML = ''; // remove from container
 			this.manageLifecycle('onLeave', cv);
 		}
 
 		this.manageLifecycle('beforeEnter', view)
-		viewEl.hidden = false;
+		this.container.appendChild(viewEl) //put in container with hidden attribue
+		viewEl.hidden = false; //animate container by removing hidden attribute
 		this.manageLifecycle('onEnter', view);
 		
 		this.previousViewID = this.currentViewID;
 		this.currentViewID = view.id;
 		this.previousPath = this.currentPath
 		this.currentPath = view.path;
+	}
+
+
+	async fetchView (origin, id) {
+		try {
+			//let page = new URL(origin, document.baseURI).href
+			console.log(id)
+			let res = await fetch(origin);
+			if (!res.ok) {
+			 let err = `An error has occurred: ${res.status}`;
+			 throw new Error(err);
+			}
+			
+			const html = await res.text();
+			let parser = new DOMParser();
+			let doc = parser.parseFromString(html, 'text/html');
+			let view = doc.getElementById(id);
+			this.container.insertAdjacentElement('afterend', view)
+			
+		} catch(error) {
+			console.log(error);
+		}
 	}
 	
 	

@@ -8,12 +8,9 @@
 </head>
 <body>
 
-	<div id="v-router-container">
-		<main id="page" class="v-router @inherit" data-v-animate="fade-in fade-out">
-			<!-- implementation example -->
-		</main>
+	<div id="v-router-container">	
 	</div>
-
+	
 	<section id="welcome" class="v-router" data-v-animate="yes good" hidden>
 		<h1>View Router <span>Demo</span></h1>
 		<p>A simple view-router.js demo with three views. This demo uses URL parameters:
@@ -26,12 +23,14 @@
 		<button id="signup-btn">Sign up</button>
 		<button id="login-btn">Login</button>
 		<a href="#signup">Sign up</a>
+		<a href="#second">Second</a>
 	</section>
 	
 	<section id="signup" class="v-router" hidden>
 		<h1>Sign Up 🚀</h1>
 		<p>Create your free account now free!</p>
 		<button id="toLogin">Go To Login</button>
+		<a href="#welcome">Go to welcome</a>
 	</section>
 	
 	<section id="login" class="v-router" hidden>
