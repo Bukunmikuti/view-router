@@ -149,22 +149,40 @@ async manageView(view) {
 			//currentViewID Exists! 
 			let cv = this.convertToView(this.currentViewID)
 			this.manageLifecycle('beforeLeave', cv);
-			// animate out
-			document.getElementById(this.currentViewID).hidden = true;
+			this.vAnimate('beforeLeave', document.getElementById(this.currentViewID)) // animate out and hidden = true;
 			this.container.insertAdjacentElement('afterend', document.getElementById(this.currentViewID))
 			this.container.innerHTML = ''; // remove from container
 			this.manageLifecycle('onLeave', cv);
 		}
 
 		this.manageLifecycle('beforeEnter', view)
-		this.container.appendChild(viewEl) //put in container with hidden attribue
-		viewEl.hidden = false; //animate container by removing hidden attribute
+		this.container.appendChild(viewEl) // put in container with hidden attribue
+		this.vAnimate('onEnter', viewEl) // hidden = false and animate in;
 		this.manageLifecycle('onEnter', view);
 		
 		this.previousViewID = this.currentViewID;
 		this.currentViewID = view.id;
 		this.previousPath = this.currentPath
 		this.currentPath = view.path;
+	}
+
+	vAnimate(action,view) {
+		//data-vrouter-animate
+		if (view.dataset.vAnimate) {
+			
+		}
+
+		let vAnimate = view.dataset.vAnimate.split(' ');
+		if (action == 'onEnter') {
+			view.hidden = false;
+			view.classList.remove(vAnimate[1])
+			view.classList.add(vAnimate[0])
+		} else if (action == 'beforeLeave') {
+			view.classList.add(vAnimate[1])
+			view.classList.remove(vAnimate[0])
+			view.hidden == true
+
+		}
 	}
 
 
@@ -240,10 +258,6 @@ async manageView(view) {
 		 window.scrollTo(0, 0)
 		}
 		
-		//data-vrouter-animate
-		if (action == 'onEnter') {
-		 console.log(data.current.view.dataset.vAnimate)
-		}
 		
 		if (action == 'beforeEnter' && view.hooks.beforeEnter != undefined) {
 			view.hooks.beforeEnter(data)
