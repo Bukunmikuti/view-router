@@ -151,7 +151,7 @@ async manageView(view) {
 			this.manageLifecycle('beforeLeave', cv);
 			this.vAnimate('beforeLeave', document.getElementById(this.currentViewID)) // animate out and hidden = true;
 			this.container.insertAdjacentElement('afterend', document.getElementById(this.currentViewID))
-			this.container.innerHTML = ''; // remove from container
+			this.container.innerHTML = '';
 			this.manageLifecycle('onLeave', cv);
 		}
 
@@ -166,23 +166,35 @@ async manageView(view) {
 		this.currentPath = view.path;
 	}
 
+
 	vAnimate(action,view) {
 		//data-vrouter-animate
 		if (view.dataset.vAnimate) {
+			let vAnimate = view.dataset.vAnimate.split(' ');
 			
+			if (action == 'onEnter') {
+			 view.hidden = false;
+			 view.classList.add(vAnimate[0])
+			 view.classList.remove(vAnimate[1])
+		 } else if (action == 'beforeLeave') {
+		  view.classList.add(vAnimate[1])
+			 view.classList.remove(vAnimate[0])
+		  view.addEventListener('transitionend', () => {
+		   view.hidden = true
+		  }, {once: true})
+			 
+		 }
+		 
+			return;
 		}
-
-		let vAnimate = view.dataset.vAnimate.split(' ');
+		
+		//no data-v-animate
 		if (action == 'onEnter') {
-			view.hidden = false;
-			view.classList.remove(vAnimate[1])
-			view.classList.add(vAnimate[0])
-		} else if (action == 'beforeLeave') {
-			view.classList.add(vAnimate[1])
-			view.classList.remove(vAnimate[0])
-			view.hidden == true
-
+			 view.hidden = false;
+			} else if (action == 'beforeLeave') {
+			 view.hidden = true;
 		}
+			
 	}
 
 
