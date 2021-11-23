@@ -9,7 +9,7 @@
 <body>
 	<div id="v-router-container"></div>
 
-	<section id="welcome" class="v-router" data-v-animate="scale-in-hor-left scale-out-ver-top" hidden>
+	<section id="welcome" class="v-router" data-v-in='scale-in-hor-left' data-v-out="scale-out-ver-top" hidden>
 		<h1>View Router <span>Demo</span></h1>
 		<p>A simple view-router.js demo with three views. This demo uses URL parameters:
 			<code>?welcome</code>
@@ -20,7 +20,7 @@
 	
 		<button id="signup-btn">Sign up</button>
 		<button id="login-btn">Login</button>
-		<a href="#signup">Sign up</a>
+		<a href="#login">Login</a>
 		<a href="#second">Second</a>
 	</section>
 	
@@ -31,7 +31,7 @@
 		<a href="#welcome">Go to welcome</a>
 	</section>
 	
-	<section id="login" class="v-router" data-v-animate="scale-in-hor-left scale-out-ver-top" hidden>
+	<section id="login" class="v-router" data-v-in="scale-in-hor-left" hidden>
 		<h1>Log in ⚡</h1>
 		<p id="h">Welcome back! Sign into your account</p>
 		<input placeholder="username" />

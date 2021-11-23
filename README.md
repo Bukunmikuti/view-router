@@ -67,7 +67,7 @@ data regarding the current view definition and not the incoming view
 
 ---
 - Change from using ```<template></template>``` to define views in HTML to using any block-level elements. This removes the need to mount views.
-- [ ] Use HTML attributes to specify in and out transitions. ```data-v-in="fade-in"``` and ```data-v-out="fade-out"``` or ```data-v-animate="fade-in fade-out"```
+- [ ] Use HTML attributes to specify in and out transitions. ```data-v-in="fade-in"``` and ```data-v-out="fade-out"```
 - [x] Implement scroll options — ```resetScroll: true||false```
 
 
@@ -111,6 +111,9 @@ data regarding the current view definition and not the incoming view
 <!-- view -->
 </div>
 ```
+
+## Bugs
+- wrong or non-existent animation class in ```data-v-in``` or ```data-v-out``` breaks ```vAnimate```
 
 
 ## Credits 🙌

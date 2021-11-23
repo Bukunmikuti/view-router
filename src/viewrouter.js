@@ -169,60 +169,34 @@ async manageView(view) {
 
 
 	vAnimate(action, view) {
-		if (view.dataset.vAnimate) {
-		 let vAnimate = view.dataset.vAnimate.split(' ');
-
-		 if (action == 'onEnter') {
-			 return new Promise(resolve => {
-				 view.hidden = false;
-				 view.addEventListener('animationend', (e) => {
-					 resolve()
-				 }, {once: true})
-				 view.classList.remove(vAnimate[1])
-				 view.classList.add(vAnimate[0])
-			 })
-		 } else if (action == 'beforeLeave') {
-			 return new Promise (resolve => {
-				view.classList.remove(vAnimate[0])
-				view.classList.add(vAnimate[1])
-				view.addEventListener('animationend', (e) => {
-					view.hidden = true
-					resolve()
-				}, {once: true})
-			 })
-		 }
-		 
-		} else {
-		 // no vAnimate
-		 if (action == 'onEnter') {
-			 view.hidden = false;
-			} else if (action == 'beforeLeave') {
-			 view.hidden = true;
-		 }
+		if (action == 'onEnter') {
+			if (view.dataset.vIn) {
+				return new Promise(resolve => {
+					view.hidden = false;
+					view.addEventListener('animationend', (e) => {
+						view.classList.remove(view.dataset.vIn)
+						resolve()
+					}, {once: true})
+					view.classList.add(view.dataset.vIn)
+				})
+			} else {
+				view.hidden = false;
+			}
+		} else if (action == 'beforeLeave') {
+			if (view.dataset.vOut) {
+				return new Promise (resolve => {
+					view.classList.add(view.dataset.vOut)
+					view.addEventListener('animationend', (e) => {
+						view.hidden = true
+						view.classList.remove(view.dataset.vOut)
+						resolve()
+					}, {once: true})
+				 })
+			} else {
+				view.hidden = true;
+			}
 		}
-		
-	/*	if (view.dataset.vAnimate) {
-			let vAnimate = view.dataset.vAnimate.split(' ');
-			
-			if (action == 'onEnter') {
-			 view.hidden = false;
-			 view.classList.add(vAnimate[0])
-			 view.classList.remove(vAnimate[1])
-		 } else if (action == 'beforeLeave') {
-		  view.classList.add(vAnimate[1])
-			 view.classList.remove(vAnimate[0])
-		  view.addEventListener('transitionend', () => {
-		   view.hidden = true
-		  }, {once: true})
-			 
-		 }
-		 
-			return;
-		}
-		
-		*/
-		
-			
+	
 	}
 
 
