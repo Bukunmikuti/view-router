@@ -8,7 +8,7 @@ let v = new ViewRouter({
 
 			hooks: {
 				onEnter(data) {
-
+					console.log('helooo welcome')
 				},
 				onLeave() {
 					console.log('welcome on leave')

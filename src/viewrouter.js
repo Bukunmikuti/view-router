@@ -145,8 +145,9 @@ async manageView(view) {
 			throw new Error(`No such template as: ${view.id}`)
 		}
 		
+	
 		if (this.currentViewID != null && this.currentViewID != view.id) {
-			//currentViewID Exists! 
+			//currentViewID Exists!
 			let cv = this.convertToView(this.currentViewID)
 			this.manageLifecycle('beforeLeave', cv);
 			await this.vAnimate('beforeLeave', document.getElementById(this.currentViewID)) // animate out and hidden = true;
@@ -157,7 +158,7 @@ async manageView(view) {
 
 		this.manageLifecycle('beforeEnter', view)
 		this.container.appendChild(viewEl) // put in container with hidden attribue
-		this.vAnimate('onEnter', viewEl) // hidden = false and animate in;
+		await this.vAnimate('onEnter', viewEl) // hidden = false and animate in;
 		this.manageLifecycle('onEnter', view);
 		
 		this.previousViewID = this.currentViewID;
@@ -167,17 +168,29 @@ async manageView(view) {
 	}
 
 
-	vAnimate(action,view) {
-	 
-
+	vAnimate(action, view) {
 		if (view.dataset.vAnimate) {
 		 let vAnimate = view.dataset.vAnimate.split(' ');
+
 		 if (action == 'onEnter') {
-		  
+			 return new Promise(resolve => {
+				 view.hidden = false;
+				 view.addEventListener('animationend', (e) => {
+					 resolve()
+				 }, {once: true})
+				 view.classList.remove(vAnimate[1])
+				 view.classList.add(vAnimate[0])
+			 })
 		 } else if (action == 'beforeLeave') {
-		  
+			 return new Promise (resolve => {
+				view.classList.remove(vAnimate[0])
+				view.classList.add(vAnimate[1])
+				view.addEventListener('animationend', (e) => {
+					view.hidden = true
+					resolve()
+				}, {once: true})
+			 })
 		 }
-		 
 		 
 		} else {
 		 // no vAnimate
@@ -213,10 +226,10 @@ async manageView(view) {
 	}
 
 
+
 	async fetchView (origin, id) {
 		try {
 			//let page = new URL(origin, document.baseURI).href
-			console.log(id)
 			let res = await fetch(origin);
 			if (!res.ok) {
 			 let err = `An error has occurred: ${res.status}`;
@@ -308,7 +321,6 @@ async manageView(view) {
 	 */
 	 hideView(view) {
 	 	if (this.currentViewID == view) {
-	 		console.log(view)
 	 		document.getElementById(view).hidden = true;
 	 	}
 	 }
