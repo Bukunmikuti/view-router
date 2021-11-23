@@ -149,7 +149,7 @@ async manageView(view) {
 			//currentViewID Exists! 
 			let cv = this.convertToView(this.currentViewID)
 			this.manageLifecycle('beforeLeave', cv);
-			this.vAnimate('beforeLeave', document.getElementById(this.currentViewID)) // animate out and hidden = true;
+			await this.vAnimate('beforeLeave', document.getElementById(this.currentViewID)) // animate out and hidden = true;
 			this.container.insertAdjacentElement('afterend', document.getElementById(this.currentViewID))
 			this.container.innerHTML = '';
 			this.manageLifecycle('onLeave', cv);
@@ -168,8 +168,27 @@ async manageView(view) {
 
 
 	vAnimate(action,view) {
-		//data-vrouter-animate
+	 
+
 		if (view.dataset.vAnimate) {
+		 let vAnimate = view.dataset.vAnimate.split(' ');
+		 if (action == 'onEnter') {
+		  
+		 } else if (action == 'beforeLeave') {
+		  
+		 }
+		 
+		 
+		} else {
+		 // no vAnimate
+		 if (action == 'onEnter') {
+			 view.hidden = false;
+			} else if (action == 'beforeLeave') {
+			 view.hidden = true;
+		 }
+		}
+		
+	/*	if (view.dataset.vAnimate) {
 			let vAnimate = view.dataset.vAnimate.split(' ');
 			
 			if (action == 'onEnter') {
@@ -188,12 +207,8 @@ async manageView(view) {
 			return;
 		}
 		
-		//no data-v-animate
-		if (action == 'onEnter') {
-			 view.hidden = false;
-			} else if (action == 'beforeLeave') {
-			 view.hidden = true;
-		}
+		*/
+		
 			
 	}
 
