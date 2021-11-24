@@ -76,24 +76,53 @@ data regarding the current view definition and not the incoming view
  v1.1.1 updates - Two new methods 
  
 ## ```start```<br>
-**Description:** Make ViewRouter navigates to the url path on page load. This function accepts a callback function which takes just one argument which is the view ID of the url path. It is defined outside the ```new ViewRouter()``` instance.<br>
+**Description:** Make ViewRouter navigates to the url path on page load. This function accepts a callback function with just one argument which is the view ID of the url path on page load. It is defined outside the ```new ViewRouter()``` instance.<br>
+```javascript
+let v = new ViewRouter({...});
+
+v.start((id) => {
+	if (id == undefined) {
+		v.routeTo('welcome')
+	}
+
+  if (id == 'dashboard' && isLogin == false) {
+    v.routeTo('login)
+  }
+})
+```
 
 > **Note:** You can call ```routeTo()``` inside callback function to navigate to your base/default view if the callback function returns undefined (that is, path on page load does not exist). 
 
 ## ```notFound()```<br>
-**Description:** Defines ViewRouter behaviour if requested url path does not exist in ```views:[]```. This method executes a callback function which accepts two arguments <br>
-		- ```previous path``` (optional): The former path where the navigation comes from
-		- ```current path``` (optional): The unmatched and non-existent view path.
-		<br>
-	This function executes whenever there is a navigation to an unmatched path. 
+**Description:** This function executes whenever there is a navigation to an unmatched path (that is, the requested url path does not exist in ```views:[]```).  <br>
+This method executes a callback function which accepts two arguments:
+- ```previous path``` (optional): The former path where the navigation comes from
+- ```current path``` (optional): The unmatched and non-existent view path.
 
+```javascript
+let v = new ViewRouter({
+  views: [...],
+  notFound: (prev, curr) {
+    return '404' // 404 is a view ID
+  }
+})
+```
 > **Note:** You cannot call ```routeTo()``` inside this callback. To navigate to a 404 view or any other view, you must return the view ID instead. For example ```return "404"``` navigates to a 404 view. <br> ```return true``` or ```undefined```, takes the current view out of the screen while ```return false``` leaves the view on screen. 
 
 ## ```resetScroll```
 **Description:** Navigation to a new view preserves the window scroll position, this is the expected browser behaviour. However, this is usually unintuitive when a view takes up the whole screen. ```resetScroll: true``` returns scroll position to top of the screen when entering a new view. <br>
 > **Note:** If you want a more elegant solution to scroll implantation, you can set ```resetScroll:false``` and use hooks to adjust scroll effects. 
 
-## Breaking Changes
+## ```data-v-in``` and ```data-v-out``` attributes
+**Description:** Introduced new HTML data attributes to apply in and out animations on views. These attributes should be used to apply animation classes. 
+```html
+<div id='view' data-v-in='fade-in' data-v-out='fade-out'>
+  <!-- view -->
+</div>
+```
+> **Note:** You can use the prebundled animations from ```viewrouter.css``` (also in the default library build) to apply on views or your custom animation classes.
+
+# Breaking Changes
 - Removed ```transition``` property
 - View Router is now distributed in two build: default build (with transitions) and core build (excluding all transitions)
 > **Note:** <br> Default build comes with all transition classes prebundled while the core build defines only view router main functionality. You can use the ```viewrouter.css``` file in the distribution to include transitions seperately or use a different animation library to handle transitions.
@@ -113,7 +142,7 @@ data regarding the current view definition and not the incoming view
 ```
 
 ## Bugs
-- wrong or non-existent animation class in ```data-v-in``` or ```data-v-out``` breaks ```vAnimate```
+- wrong or non-existent animation class in ```data-v-in``` or ```data-v-out``` breaks ```vAnimate``` [**FIXED** - used ```animationExists()```]
 
 
 ## Credits 🙌

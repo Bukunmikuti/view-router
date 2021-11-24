@@ -173,11 +173,17 @@ async manageView(view) {
 			if (view.dataset.vIn) {
 				return new Promise(resolve => {
 					view.hidden = false;
-					view.addEventListener('animationend', (e) => {
-						view.classList.remove(view.dataset.vIn)
-						resolve()
-					}, {once: true})
 					view.classList.add(view.dataset.vIn)
+					if (animationExists(view)) {
+						view.addEventListener('animationend', (e) => {
+							view.classList.remove(view.dataset.vIn)
+							resolve()
+						}, {once: true})
+					} else {
+						view.classList.remove(view.dataset.vIn)
+						resolve(false)
+						return true;
+					}
 				})
 			} else {
 				view.hidden = false;
@@ -186,15 +192,26 @@ async manageView(view) {
 			if (view.dataset.vOut) {
 				return new Promise (resolve => {
 					view.classList.add(view.dataset.vOut)
-					view.addEventListener('animationend', (e) => {
+					if (animationExists(view)) {
+						view.addEventListener('animationend', (e) => {
+							view.hidden = true
+							view.classList.remove(view.dataset.vOut)
+							resolve()
+						}, {once: true})
+					} else {
 						view.hidden = true
 						view.classList.remove(view.dataset.vOut)
 						resolve()
-					}, {once: true})
+					}
 				 })
 			} else {
 				view.hidden = true;
 			}
+		}
+
+		// helper func: get animation-duration of view
+		function animationExists (view) {
+			return parseFloat(window.getComputedStyle(view).getPropertyValue('animation-duration')) > 0;
 		}
 	
 	}
@@ -301,7 +318,7 @@ async manageView(view) {
 
 	
 	/**
-	 * Navi to url hash path on hash change event
+	 * Navigate to url hash path on hash change event
 	 * Handles unspecified url path by call this.notFound bound function
 	 * @var re: represents the return value of notFound() callback
 	 * Hide view if re is true or undefined
