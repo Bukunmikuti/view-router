@@ -66,8 +66,8 @@ The current view from ```data.current.view``` might be off screen and hidden whe
 data regarding the current view definition and not the incoming view
 
 ---
-- Change from using ```<template></template>``` to define views in HTML to using any block-level elements. This removes the need to mount views.
-- [ ] Use HTML attributes to specify in and out transitions. ```data-v-in="fade-in"``` and ```data-v-out="fade-out"```
+- [x] Change from using ```<template></template>``` to define views in HTML to using any block-level elements. This removes the need to mount views.
+- [x] Use HTML attributes to specify in and out transitions. ```data-v-in="fade-in"``` and ```data-v-out="fade-out"```
 - [x] Implement scroll options — ```resetScroll: true||false```
 
 
@@ -81,12 +81,12 @@ data regarding the current view definition and not the incoming view
 let v = new ViewRouter({...});
 
 v.start((id) => {
-	if (id == undefined) {
-		v.routeTo('welcome')
-	}
-
+  if (id == undefined) {
+    v.routeTo('welcome')
+  }
+  
   if (id == 'dashboard' && isLogin == false) {
-    v.routeTo('login)
+    v.routeTo('login')
   }
 })
 ```
