@@ -32,7 +32,7 @@
  - [x] refine Lifecycle hooks to help handle views entry and exit more effectively. <br>
  **proposed Lifecycle hooks:** <br> beforeEnter() <br> onEnter() <br> beforeLeave() <br> onLeave() 
  
-- [x] Change from using ```<template></template>``` to define views in HTML to using any block-level elements. This removes the need to mount views.
+- [x] Change from using ```<template></template>``` to define views to using any block-level elements. This removes the need to mount views.
 - [x] Use HTML attributes to specify in and out transitions. ```data-v-in="fade-in"``` and ```data-v-out="fade-out"```
 - [x] Implement scroll options — ```resetScroll: true||false```
 
@@ -42,6 +42,7 @@
  v2.0.0 updates - Two new methods 
 
  ## New Lifecycle Methods
+
  **Description:** v2.0.0 introduces new lifecycle hooks: ```beforeEnter```, ```onEnter```, ```beforeLeave``` and ```onLeave```. 
  ```javascript
  let v = new ViewRouter({
@@ -50,10 +51,10 @@
        hooks: {
         beforeEnter(data){},
         onEnter(data){},
-        beforeLeave(data){}
+        beforeLeave(data){},
         onLeave(data){}
-			}
-		},
+      }
+    },
   ]
  ```
 
@@ -76,11 +77,11 @@ data: {
 
 
 **Lifecycle hooks:** <br>
-**```beforeEnter```:** The view is called but yet to be displayed. Note that the previous view is out of screen by now. It is called after ```onLeave``` of the previous view. <br>
+**```beforeEnter```:** The view is called but yet to be displayed. Note that the previous view is out of screen by now. It is called after ```onLeave``` of the previous view. <br><br>
 
-**```onEnter```:** The view is now on screen. This hook is called after ```beforeEnter``` <br>
+**```onEnter```:** The view is now on screen. This hook is called after ```beforeEnter``` <br><br>
 
-**```beforeLeave```:** This hook is called before the current view leaves the screen. That is, the view is still on screen though  a new view has been called. <br>
+**```beforeLeave```:** This hook is called before the current view leaves the screen. That is, the view is still on screen though  a new view has been called. <br><br>
 
 **```onLeave```:** The view is now out of screen and the incoming view is also not on screen. It is called before ```beforeEnter``` of incoming view
 
