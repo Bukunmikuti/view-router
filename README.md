@@ -23,7 +23,7 @@
  -------------------------
  
  # Roadmap 🚧
- Roadmap and checklist for v1.1.1 release
+ Roadmap and checklist for v2.0.0 release
  
  - [x] Make current view 'disappear' or go off screen if back button is pressed and there is no view to nativage to. <br>
  **Current behaviour:** The browser does nothing when back button is clicked and exits page on second click <br>
@@ -32,8 +32,32 @@
  - [x] refine Lifecycle hooks to help handle views entry and exit more effectively. <br>
  **proposed Lifecycle hooks:** <br> beforeEnter() <br> onEnter() <br> beforeLeave() <br> onLeave() 
  
----
-All Lifecycle hooks receives a ```data``` argument:
+- [x] Change from using ```<template></template>``` to define views in HTML to using any block-level elements. This removes the need to mount views.
+- [x] Use HTML attributes to specify in and out transitions. ```data-v-in="fade-in"``` and ```data-v-out="fade-out"```
+- [x] Implement scroll options — ```resetScroll: true||false```
+
+
+
+ # Updates 🚀
+ v2.0.0 updates - Two new methods 
+
+ ## New Lifecycle Methods
+ **Description:** v2.0.0 introduces new lifecycle hooks: ```beforeEnter```, ```onEnter```, ```beforeLeave``` and ```onLeave```. 
+ ```javascript
+ let v = new ViewRouter({
+   views: [
+     {
+       hooks: {
+        beforeEnter(data){},
+        onEnter(data){},
+        beforeLeave(data){}
+        onLeave(data){}
+			}
+		},
+  ]
+ ```
+
+ All Lifecycle hooks receives a ```data``` argument:
 ```javascript
 data: {
  previous: {
@@ -43,37 +67,27 @@ data: {
  }, 
  current: {
   view: HTMLElement //CURRENT view Element
-  path: String //CURRENT path
   id: String
  }, 
 }
 ```
-**```data.previous```:** Contains previous view data. 
+**```data.previous```:** Contains previous view data.<br> 
 **```data.current```:** Contains current view data
 
 
-**Note:** <br>
-**```beforeEnter```:** The view is called but yet to be displayed. Note that the previous view is out of screen by now. It is called after ```onLeave``` of the previous view. <br><br>
+**Lifecycle hooks:** <br>
+**```beforeEnter```:** The view is called but yet to be displayed. Note that the previous view is out of screen by now. It is called after ```onLeave``` of the previous view. <br>
 
-**```onEnter```:** The view is now on screen. This hook is called after ```beforeEnter``` <br><br>
+**```onEnter```:** The view is now on screen. This hook is called after ```beforeEnter``` <br>
 
-**```beforeLeave```:** This hook is called before the current view leaves the screen. That is, the view is still on screen though  a new view has been called. <br><br>
+**```beforeLeave```:** This hook is called before the current view leaves the screen. That is, the view is still on screen though  a new view has been called. <br>
 
 **```onLeave```:** The view is now out of screen and the incoming view is also not on screen. It is called before ```beforeEnter``` of incoming view
 
 > **Caution 💡:** <br>
-The current view from ```data.current.view``` might be off screen and hidden when accessed from ```beforeEnter``` and ```onLeave``` hooks. This is because the ```data.current``` only retrieves
-data regarding the current view definition and not the incoming view
+The HTMLElement from ```data.current.view``` might be hidden when accessed from ```beforeEnter``` and ```onLeave``` hooks. This is because the ```data.current``` is not visible yet.
 
 ---
-- [x] Change from using ```<template></template>``` to define views in HTML to using any block-level elements. This removes the need to mount views.
-- [x] Use HTML attributes to specify in and out transitions. ```data-v-in="fade-in"``` and ```data-v-out="fade-out"```
-- [x] Implement scroll options — ```resetScroll: true||false```
-
-
-
- # Updates 🚀
- v1.1.1 updates - Two new methods 
  
 ## ```start```<br>
 **Description:** Make ViewRouter navigates to the url path on page load. This function accepts a callback function with just one argument which is the view ID of the url path on page load. It is defined outside the ```new ViewRouter()``` instance.<br>
@@ -123,9 +137,10 @@ let v = new ViewRouter({
 > **Note:** You can use the prebundled animations from ```viewrouter.css``` (also in the default library build) to apply on views or your custom animation classes.
 
 # Breaking Changes
-- Removed ```transition``` property
-- View Router is now distributed in two build: default build (with transitions) and core build (excluding all transitions)
-> **Note:** <br> Default build comes with all transition classes prebundled while the core build defines only view router main functionality. You can use the ```viewrouter.css``` file in the distribution to include transitions seperately or use a different animation library to handle transitions.
+- Changed lifecycle hooks. ```render()``` and ```mounted()``` are no longer supported.
+- Removed ```transition``` property.
+- View Router is now distributed in two formats: UMD and ES module. View Router also ships some default entry/exit transition classes for views.
+> **Note:** <br> Check ```viewrouter.css``` for simple entry and exit animatons for views. It also includes all animations in ```viewrouter.slim.css```. Amimation classes should be used with  ```data-v-in(out)``` attributes. These animations can also be used alongside with fully-fledged animation libraries like GSAP, popmotion, e.t.c
 - The use of ```template``` tags to define views in HTML is now deprecated and should not be used anymore. Use any block-level container (like ```div``` or ```section```) to define views instead.
 
 *Deprecated:*<br> 
