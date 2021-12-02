@@ -1,3 +1,3 @@
-import './css/viewrouter2.css';
+import './css/viewrouter.slim.css';
 import ViewRouter from './viewrouter.js';
 export default ViewRouter;

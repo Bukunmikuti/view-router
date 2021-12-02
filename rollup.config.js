@@ -1,66 +1,30 @@
 import { terser } from "rollup-plugin-terser";
-import styles from "rollup-plugin-styles";
+import postcss from 'rollup-plugin-postcss'
 
 export default {
     input: './src/index.js',
-    plugins: [styles({mode: ["extract", "./dist/css/viewrouter.css"]})],
-    //plugins: [styles()],
-    output: [
-        {
-            file: './dist/core/viewrouter.core.esm.js',
-            format: 'es',
-        },
-        {
-            file: './dist/core/viewrouter.core.esm.min.js',
-            format: 'es',
-            plugins: [terser()]
-        },
-        {
-            file: './dist/core/viewrouter.core.min.js',
-            format: "umd",
-            name: "ViewRouter", //name of the global object
-            plugins: [terser()]
-        },
-        /* {
-            file: './dist/default/viewrouter.esm.js',
-            format: 'es',
-        },
-        {
-            file: './dist/default/viewrouter.esm.min.js',
-            format: 'es',
-            plugins: [terser()]
-        },
-        {
-            file: './dist/default/viewrouter.min.js',
-            format: "umd",
-            name: "ViewRouter", //name of the global object
-            plugins: [terser()]
-        } */
+    plugins: [
+        postcss({
+            extract: 'css/viewrouter.slim.min.css',
+            minimize: true
+        })
     ],
-    
-
-}
-/* export default {
-    input: './src/index.js',
-    plugins: [styles()],
     output: [
         {
-            file: './dist/esm/viewrouter.es.js',
+            file: './dist/viewrouter.esm.js',
             format: 'es',
         },
         {
-            file: './dist/esm/viewrouter.es.min.js',
+            file: './dist/viewrouter.esm.min.js',
             format: 'es',
             plugins: [terser()]
         },
         {
-            file: './dist/umd/viewrouter.min.js',
+            file: './dist/viewrouter.min.js',
             format: "umd",
             name: "ViewRouter", //name of the global object
-            sourcemap: true,
             plugins: [terser()]
         }
     ],
-    
 
-} */
+}

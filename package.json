@@ -1,13 +1,17 @@
 {
   "name": "@bukunmikuti/view-router",
-  "version": "1.0.1",
+  "version": "2.0.0",
+  "license": "ISC",
   "description": "A super simple in-page router/navigator",
+  "author": "Bukunmikuti",
   "type": "module",
-  "main": "./dist/viewrouter.umd.min.js",
-  "browser": "./dist/viewrouter.umd.min.js",
-  "module": "./dist/viewrouter.esm.min.js",
+  "main": "./dist/viewrouter.min.js",
+  "browser": "./dist/viewrouter.min.js",
+  "module": "./dist/viewrouter.esm.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup --config"
   },
   "repository": {
@@ -18,7 +22,8 @@
   "keywords": [
     "view router",
     "view transitions",
-    "navigator",
+    "animations",
+    "pushstate",
     "javascript",
     "simple",
     "browser",
@@ -26,9 +31,7 @@
   ],
   "devDependencies": {
     "rollup": "^2.57.0",
-    "rollup-plugin-styles": "^3.14.1",
+    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-terser": "^7.0.2"
-  },
-  "author": "Bukunmikuti",
-  "license": "ISC"
+  }
 }
