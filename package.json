@@ -1,32 +1,28 @@
 {
-  "name": "@bukunmikuti/view-router",
-  "version": "1.0.1",
-  "description": "A super simple in-page router/navigator",
-  "type": "module",
-  "main": "./dist/viewrouter.umd.min.js",
-  "browser": "./dist/viewrouter.umd.min.js",
-  "module": "./dist/viewrouter.esm.min.js",
+  "name": "@bukunmikuti/view-router-docs",
+  "version": "0.1.0",
+  "description": "Documentation for View Router",
+  "author": "Bukunmi Kuti",
+  "license": "ISC",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "bili"
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Bukunmikuti/view-router.git"
+    "url": "git+https://github.com/Bukunmikuti/view-router.git"
   },
-  "bugs": "https://github.com/Bukunmikuti/view-router/issues",
   "keywords": [
     "view router",
-    "view transitions",
-    "navigator",
-    "javascript",
-    "simple",
-    "browser",
-    "esm"
+    "documentation",
+    "vuepress"
   ],
-  "devDependencies": {
-    "bili": "5.0.5"
+  "bugs": {
+    "url": "https://github.com/Bukunmikuti/view-router/issues"
   },
-  "author": "Bukunmikuti",
-  "license": "ISC"
+  "homepage": "https://github.com/Bukunmikuti/view-router#readme",
+  "devDependencies": {
+    "vuepress": "^2.0.0-beta.27"
+  }
 }
