@@ -33,6 +33,7 @@ let v = new ViewRouter({
 				},
 				beforeLeave(el) {
 					console.log('Register would leave now')
+					return false;
 				},
 				onLeave() {
 					console.log('Register Left')

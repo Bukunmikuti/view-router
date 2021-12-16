@@ -149,7 +149,10 @@ async manageView(view) {
 		if (this.currentViewID != null && this.currentViewID != view.id) {
 			//currentViewID Exists!
 			let cv = this.convertToView(this.currentViewID)
-			this.manageLifecycle('beforeLeave', cv);
+			let re = await this.manageLifecycle('beforeLeave', cv)
+			if (re == false) {
+			 return false;
+			}
 			await this.vAnimate('beforeLeave', document.getElementById(this.currentViewID)) // animate out and hidden = true;
 			this.container.insertAdjacentElement('afterend', document.getElementById(this.currentViewID))
 			this.container.innerHTML = '';
@@ -299,7 +302,14 @@ async manageView(view) {
 		}
 		
 		if (action == 'beforeLeave' && view.hooks.beforeLeave != undefined) {
-			view.hooks.beforeLeave(data)
+			let re = view.hooks.beforeLeave(data)
+			console.log(re)
+			if (re == false) {
+			 return new Promise(reject => {
+			  reject(re)
+			 })
+			 //stop before Leave 
+			}
 		}
 		
 		if (action == 'onLeave' && view.hooks.onLeave != undefined) {
