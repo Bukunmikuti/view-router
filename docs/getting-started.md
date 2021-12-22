@@ -11,14 +11,14 @@ import ViewRouter from @bukunmikuti/view-router
 ```
 
 ## From CDN
-You can get the source and include on your webpage using your favourite CDN
+You can get the source using your favourite CDN and include on your webpage.
 <br> 
-### Script include:
+**Script include:**
 
 ```html
 <script src="https://unpkg.com/@bukunmikuti/view-router"></script>
 ```
-### ESM
+**ES Module** <br>
 Import a minified production file:
 
 ```javascript
