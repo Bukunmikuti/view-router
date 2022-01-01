@@ -1,4 +1,5 @@
 # Introduction
+## What is View Router?
 View Router is a minimal in-page (or sometimes called, on-page) navigation library. View Router helps manage multiple ```views``` in a page by providing flexible routing methods to control what is on page at any particular instance.<br><br>
 View Router does not replace client-side routers but can be used alongside for flexible routing options.
 

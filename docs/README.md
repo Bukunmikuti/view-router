@@ -1,5 +1,14 @@
+---
+home: true
+actions:
+  - text: Get Started
+    link: /guide/getting-started.html
+    type: primary
+  - text: Introduction
+    link: /guide/
+    type: secondary
+---
 # View Router
-
 <p align="center">A minimal, super simple in-page router ⚡ </p>
 
 <p align="center">
