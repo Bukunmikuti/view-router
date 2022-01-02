@@ -24,7 +24,8 @@ module.exports = {
           text: 'Getting Started',
           children: [
             '/guide/installation.md',
-            '/guide/setup.md'
+            '/guide/setup.md',
+            '/guide/options.md'
           ]
         }
       ]

@@ -1,4 +1,4 @@
-# Installation 🚀
+# Installation :rocket:
 ## NPM
 ```
 npm install @bukunmikuti/view-router
