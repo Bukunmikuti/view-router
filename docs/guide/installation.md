@@ -9,7 +9,7 @@ import ViewRouter from @bukunmikuti/view-router
 ```
 
 ## From CDN
-You can get the source using your favourite CDN and include on your webpage.
+Get the source using your any of your favourite CDN and include on your webpage.
 <br> 
 **Script include:**
 
@@ -24,5 +24,5 @@ import ViewRouter from "https://cdn.jsdelivr.net/npm/@bukunmikuti/view-router/+e
 ```
 
 ::: tip Minified Bundle ⚠
-Make sure to use a minified bundle in production. 
+Make sure to use the minified bundle in production. 
 :::

@@ -1,6 +1,6 @@
 # Setup 🎈
 It is so easy to get started with View Router. First, define your `view` in HTML. <br>
-Each view is identified by its unique `id` attribute and must include the ```v-router``` class
+Each view is identified by its `id` attribute and must include the ```v-router``` class
 ```html
 <div id='page1' class='v-router' hidden>
 <!-- view -->
