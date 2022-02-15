@@ -89,4 +89,5 @@ data: {
 
 - It is not advisable to toggle the `hidden` attribute on any view using hooks. Let View Router handle this for you natively.
 :::
+
 You can also define hooks using the [`setHook`](#hooks) method.
