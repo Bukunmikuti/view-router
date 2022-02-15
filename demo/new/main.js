@@ -33,7 +33,6 @@ let v = new ViewRouter({
 				},
 				beforeLeave(el) {
 					console.log('Register would leave now')
-					return false;
 				},
 				onLeave() {
 					console.log('Register Left')
@@ -97,9 +96,8 @@ signupBtn.onclick = () => {
 	v.routeTo('signup')
 }
 
-
-
-
-
+v.on('beforeEnter', '404', (data) => {
+	
+})
 
 

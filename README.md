@@ -35,6 +35,7 @@
 - [x] Change from using ```<template></template>``` to define views to using any block-level elements. This removes the need to mount views.
 - [x] Use HTML attributes to specify in and out transitions. ```data-v-in="fade-in"``` and ```data-v-out="fade-out"```
 - [x] Implement scroll options — ```resetScroll: true||false```
+- [ ] ```on``` method to define lifecycle hooks outside the view property
 
 
 
